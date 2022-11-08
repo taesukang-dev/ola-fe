@@ -2,7 +2,7 @@ import * as s from './Header.style'
 import Button from "../../element/Button";
 import {useNavigate} from 'react-router-dom'
 
-const Header = () => {
+const UnSignedHeader = () => {
     const navigate = useNavigate()
     return (
         <s.GridBox>
@@ -23,4 +23,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default UnSignedHeader
