@@ -2,9 +2,36 @@ import PlusButton from "../../element/PlusButton";
 import styled from "styled-components";
 import {useState} from "react";
 import Button from "../../element/Button";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {addMember} from "../../shared/api/api";
+import {useSelector} from "react-redux";
 
-const AddMember = () => {
+const AddMember = ({id, userId, member}) => {
+    const queryClient = useQueryClient()
+    const user = useSelector((state) => state.user)
     const [modal, setModal] = useState(false)
+    const {mutate} = useMutation((id) => addMember(id), {
+        onSuccess: (data) => {
+            alert('참여가 완료되었습니다.')
+            queryClient.invalidateQueries('post')
+            setModal(!modal)
+        }
+    })
+
+    const addMemberMutate = () => {
+        if (user.current === userId) {
+            alert("자신의 모집에는 참가할 수 없습니다.")
+            return
+        }
+        let flag = false
+        member.filter(e => e.userId === user.current ? flag = true : flag)
+        if (flag) {
+            alert('이미 참가한 모집입니다.')
+            return
+        }
+        mutate(id);
+    }
+
     return (
         <ButtonContainer>
             <PlusButton
@@ -25,7 +52,9 @@ const AddMember = () => {
                     <div>
                         <Button
                             bold={"true"}
-                            padding={"10px"}>확인</Button>
+                            padding={"10px"}
+                            _onClick={() => addMemberMutate()}
+                        >확인</Button>
                         <Button
                             _onClick={() => setModal(!modal)}
                             margin={"0px 0px 0px 10px"}

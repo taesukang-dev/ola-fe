@@ -70,7 +70,7 @@ const InputBox = styled.input`
     margin: 10px 0px;
     border: 1px solid #808080;
     width: 100%;
-    padding: 16px 0px;
+    padding: 10px 0px;
     box-sizing: border-box;
 `;
 

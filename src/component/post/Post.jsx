@@ -16,7 +16,7 @@ const Post = ({title, registeredAt, userId, homeGym, content, ageRange}) => {
                     {userId} ({ageRange}대, {homeGym})
                 </s.UserBox>
             </s.TitleContainer>
-            <div style={{padding: "16px"}}>
+            <div style={{padding: "16px", height: "30vh"}}>
                 {content}
             </div>
         </div>

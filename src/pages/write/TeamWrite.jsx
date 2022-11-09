@@ -50,10 +50,6 @@ const TeamWrite = () => {
                     <Text bold>인원</Text>
                     <s.SelectBox >
                         <s.RadioBox>
-                            <input type={"radio"} value={1} name={"limits"} />
-                            <label htmlFor={"1"} style={{margin: "0px 0px 0px 10px"}}>1명</label>
-                        </s.RadioBox>
-                        <s.RadioBox>
                             <input type={"radio"} value={2} name={"limits"} />
                             <label htmlFor={"2"} style={{margin: "0px 0px 0px 10px"}}>2명</label>
                         </s.RadioBox>
@@ -64,6 +60,10 @@ const TeamWrite = () => {
                         <s.RadioBox>
                             <input type={"radio"} value={4} name={"limits"} />
                             <label htmlFor={'4'} style={{margin: "0px 0px 0px 10px"}}>4명</label>
+                        </s.RadioBox>
+                        <s.RadioBox>
+                            <input type={"radio"} value={5} name={"limits"} />
+                            <label htmlFor={'5'} style={{margin: "0px 0px 0px 10px"}}>5명</label>
                         </s.RadioBox>
                     </s.SelectBox>
                 </s.SelectContainer>

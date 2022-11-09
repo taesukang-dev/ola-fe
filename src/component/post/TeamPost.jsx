@@ -2,7 +2,7 @@ import * as s from './Post.style'
 import Text from "../../element/Text";
 import AddMember from "../addmember/AddMember";
 
-const TeamPost = ({title, registeredAt, userId, homeGym, content, ageRange, place, limits, member}) => {
+const TeamPost = ({id, title, registeredAt, nickname, userId, homeGym, content, ageRange, place, limits, member}) => {
     return (
         <div style={{width: "80%"}}>
             <s.TitleContainer>
@@ -15,7 +15,7 @@ const TeamPost = ({title, registeredAt, userId, homeGym, content, ageRange, plac
                     </s.RegisterBox>
                 </s.TitleBox>
                 <s.UserBox>
-                    {userId} ({ageRange}대, {homeGym})
+                    {nickname} ({ageRange}대, {homeGym})
                 </s.UserBox>
             </s.TitleContainer>
             <s.MemberContainer>
@@ -24,15 +24,20 @@ const TeamPost = ({title, registeredAt, userId, homeGym, content, ageRange, plac
                     <Text>팀</Text>
                     <Text bold>( {member.length} / {limits} )</Text>
                     {
-                        limits - member.length > 0 && <AddMember />
+                        limits - member.length > 0 && <AddMember id={id} userId={userId} member={member} />
                     }
                 </s.MemberCountBox>
                 {
                     member.map((e, i) =>
-                        <s.MemberBox
-                            key={i}
-                            url={"https://m.media-amazon.com/images/M/MV5BMTgxMDkzMDM1OF5BMl5BanBnXkFtZTgwMzI3NTE2NTE@._V1_.jpg"}
-                        />
+                        {
+                            return (<s.MemberCard
+                                key={i}>
+                                <s.MemberBox
+                                    url={"https://m.media-amazon.com/images/M/MV5BMTgxMDkzMDM1OF5BMl5BanBnXkFtZTgwMzI3NTE2NTE@._V1_.jpg"}
+                                />
+                                {e.nickname} ({e.ageRange}대, {e.homeGym})
+                            </s.MemberCard>)
+                        }
                     )
                 }
             </s.MemberContainer>
