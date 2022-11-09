@@ -4,6 +4,7 @@ import {getPost} from "../../shared/api/api";
 import {useQuery} from "@tanstack/react-query";
 import Button from "../../element/Button";
 import Post from "../../component/post/Post";
+import Comment from "../../component/comment/Comment";
 
 const Detail = () => {
     const id = useParams().id
@@ -22,6 +23,7 @@ const Detail = () => {
                     content={data?.result.content}
                 />
             }
+            <Comment postId={id} />
             <s.ButtonBox>
                 <Button
                     type={"submit"} padding={"10px"}

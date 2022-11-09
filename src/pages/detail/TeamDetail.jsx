@@ -16,8 +16,10 @@ const TeamDetail = () => {
     return (
         <s.GridBox>
             <TeamPost
+                id={id}
                 title={data?.result.title}
                 registeredAt={data?.result.registeredAt.split('T')[0]}
+                nickname={data?.result.user.nickname}
                 userId={data?.result.user.userId}
                 homeGym={data?.result.user.homeGym}
                 ageRange={data?.result.user.ageRange}
