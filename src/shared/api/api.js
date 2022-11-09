@@ -14,3 +14,12 @@ export const getPost = (id) => axiosInstance.get(`/v2/posts/${id}`).then(res => 
 
 export const getTeamPost = (id) => axiosInstance.get(`/v2/posts/team/${id}`).then(res => res)
 
+export const addMember = (postId) => axiosInstance.post(`/v1/posts/team/${postId}/member`).then(res => res)
+
+export const getPostList = (page = 0) => axiosInstance.get(`/v2/posts?page=${page}`).then(res => res)
+
+export const getTeamPostList = (page = 0) => axiosInstance.get(`/v2/posts/team?page=${page}`).then(res => res)
+
+export const writeComment = (postId, content) => axiosInstance.post(`/v1/posts/${postId}/comments`, content).then(res => res)
+
+export const getComments = (postId) => axiosInstance.get(`/v1/posts/${postId}/comments`).then(res => res)
