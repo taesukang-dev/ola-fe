@@ -67,7 +67,6 @@ const SignUp = () => {
                     _onChange={(e) => setName(e.target.value)}
                 />
 
-                {/*TODO : radiobutton map으로 돌릴것, state 로 radio박스마다 check event*/}
                 <s.SelectContainer>
                     <Text bold>연령대</Text>
                     <s.SelectBox onChange={(e) => setAgeRange(e.target.value)}>

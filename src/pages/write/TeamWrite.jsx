@@ -6,8 +6,10 @@ import Text from "../../element/Text";
 import {useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import {writeTeamPost} from "../../shared/api/api";
+import {useNavigate} from "react-router-dom";
 
 const TeamWrite = () => {
+    const navigate = useNavigate()
     const user = useSelector((state) => state.user)
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
@@ -15,9 +17,7 @@ const TeamWrite = () => {
     const [limits, setLimits] = useState('')
 
     const {mutate} = useMutation((param) => writeTeamPost(param), {
-        onSuccess: (data) => {
-            console.log(data)
-        }
+        onSuccess: (data) => navigate(`/detail/team/${data.result.id}`)
     })
 
     const writeTeamPostMutate = () => {
