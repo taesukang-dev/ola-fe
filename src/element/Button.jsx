@@ -12,10 +12,11 @@ const Button = (props) => {
         color,
         type,
         height,
-        warn
+        warn,
+        bold
     } = props
 
-    const styles = {margin, padding, bg, width, color, height, warn}
+    const styles = {margin, padding, bg, width, color, height, warn, bold}
 
     return (
         <>
@@ -35,7 +36,8 @@ Button.defaultProps = {
     width: "",
     bg: "false",
     color: "",
-    height: ""
+    height: "",
+    bold: "false"
 }
 
 const ButtonBox = styled(motion.button)`
@@ -49,6 +51,7 @@ const ButtonBox = styled(motion.button)`
     font-size: 16px;
     border: ${(props) => props.warn === "true" ? "1px solid #c4302b" : "1px solid #ABABAB"};
     cursor: pointer;
+    font-weight: ${(props) => props.bold === "true"? "700" : "400"}
 `
 
 export default Button
