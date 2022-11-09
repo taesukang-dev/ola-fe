@@ -17,11 +17,7 @@ const Write = () => {
         content: content,
         username: user.current
     }), {
-        onSuccess: (data) => {
-            // TODO : detail 로 이동할 것
-            console.log(data)
-        }
-    })
+        onSuccess: (data) => navigate(`/detail/${data.result.id}`) })
 
     const writeMutate = () => {
         if (title !== '' && content !== '') {
