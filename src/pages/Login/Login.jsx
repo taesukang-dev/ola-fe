@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setUserUp} from "../../store/userSlice";
 import Text from "../../element/Text";
+import {deleteCookie, getCookie} from "../../shared/Cookie";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -30,9 +31,12 @@ const Login = () => {
     })
 
     const loginMutate = () => {
+        if (getCookie('x_auth')) {
+            deleteCookie('x_auth')
+        }
         if (username === '' || password === '') {
-            alert("로그인 정보를 입력했는지 확인해주세요.")
-            return
+            alert("로그인 정보를 입력했는지 확인해주세요.");
+            return;
         }
         mutate()
     }
