@@ -6,7 +6,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {deleteComment, writeCommentWithParent} from "../../shared/api/api";
 import {useSelector} from "react-redux";
 
-const CommentColumn = ({postId, commentId, childs, tab, username, nickname, content, parent}) => {
+const CommentColumn = ({postId, commentId, childs, tab, username, nickname, content, parent, type}) => {
     const queryClient = useQueryClient()
     const user = useSelector((state) => state.user)
     const [commentContent, setCommentContent] = useState('')
@@ -15,7 +15,7 @@ const CommentColumn = ({postId, commentId, childs, tab, username, nickname, cont
     const deleteMutation = useMutation(() => deleteComment(postId, commentId), {
         onSuccess: (data) => queryClient.invalidateQueries('comments')})
 
-    const {mutate} = useMutation(() => writeCommentWithParent(postId, commentId, {content: commentContent}), {
+    const {mutate} = useMutation(() => writeCommentWithParent(postId, commentId, {content: commentContent, type: type}), {
         onSuccess: (data) => {
             queryClient.invalidateQueries('comments')
             setReply(false)

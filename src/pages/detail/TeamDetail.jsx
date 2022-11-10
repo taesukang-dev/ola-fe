@@ -29,7 +29,7 @@ const TeamDetail = () => {
                 limits={data?.result.limits}
                 member={data?.result.member}
             />
-            <Comment postId={id} />
+            <Comment postId={id} type={"TEAM_POST"}/>
             <s.ButtonBox>
                 <Button
                     type={"submit"} padding={"10px"}

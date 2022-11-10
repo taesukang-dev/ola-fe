@@ -1,14 +1,13 @@
 import * as s from './Header.style'
 import Button from "../../element/Button";
 import {useNavigate} from 'react-router-dom'
+import HeaderTitle from "./HeaderTitle";
 
 const UnSignedHeader = () => {
     const navigate = useNavigate()
     return (
         <s.GridBox>
-            <div
-                onClick={() => navigate(`/`)}
-            >ola</div>
+            <HeaderTitle />
             <s.SideBox>
                 <Button
                     padding={"10px"}
