@@ -1,6 +1,6 @@
 import CommentColumn from "./CommentColumn";
 
-const Comments = ({postId, comment, tab = 0}) => {
+const Comments = ({postId, comment, tab = 0, type}) => {
     return (
             <>
                 {
@@ -8,6 +8,7 @@ const Comments = ({postId, comment, tab = 0}) => {
                     comment.map((e, i) =>
                         <CommentColumn
                             key={i}
+                            type={type}
                             postId={postId}
                             commentId={e.id}
                             childs={e.child}

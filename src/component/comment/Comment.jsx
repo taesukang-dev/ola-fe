@@ -7,7 +7,7 @@ import {getComments, writeComment} from "../../shared/api/api";
 import Text from "../../element/Text";
 import Comments from "./Comments";
 
-const Comment = ({postId}) => {
+const Comment = ({postId, type}) => {
     const queryClient = useQueryClient()
     const inputRef = useRef()
     const [content, setContent] = useState('')
@@ -23,7 +23,7 @@ const Comment = ({postId}) => {
             alert("입력 후 작성 버튼을 눌러주세요.")
             return
         }
-        mutate({content: content});
+        mutate({content: content, type: type});
     }
 
     return (
@@ -46,6 +46,7 @@ const Comment = ({postId}) => {
                 <Text>내용</Text>
             </s.CommentColumnHeader>
             { data && <Comments
+                type={type}
                 comment={data?.result}
                 postId={postId}
             />}
