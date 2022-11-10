@@ -1,6 +1,6 @@
 import * as s from './Post.style'
 
-const Post = ({title, registeredAt, userId, homeGym, content, ageRange}) => {
+const Post = ({title, registeredAt, nickname, homeGym, content, ageRange}) => {
     return (
         <div style={{width: "80%"}}>
             <s.TitleContainer>
@@ -13,7 +13,7 @@ const Post = ({title, registeredAt, userId, homeGym, content, ageRange}) => {
                     </s.RegisterBox>
                 </s.TitleBox>
                 <s.UserBox>
-                    {userId} ({ageRange}대, {homeGym})
+                    {nickname} ({ageRange}대, {homeGym})
                 </s.UserBox>
             </s.TitleContainer>
             <div style={{padding: "16px", height: "30vh"}}>
