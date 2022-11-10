@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const CommentContainer = styled.div`
     width: 80%;
-    height: 300px;
 `
 
 export const CommentHeader = styled.div`
@@ -14,9 +13,18 @@ export const CommentHeader = styled.div`
 export const InputBox = styled.div`
     display: grid; 
     grid-template-columns: 4fr 1fr;
+    margin: 0px 0px 0px ${(props) => props.tab ? props.tab : 0}px;
 `
 
-export const CommentColumn = styled.div`
+export const CommentColumnHeader = styled.div`
     display: grid; 
     grid-template-columns: 1fr 4fr;
+`
+
+export const CommentColumnBox = styled.div`
+    display: grid; 
+    padding: 10px 0px;
+    grid-template-columns: 1fr 3fr 1fr;
+    border-bottom: 1px solid black;
+    margin: 0px 0px 0px ${(props) => props.tab ? props.tab : 0}px;
 `
