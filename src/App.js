@@ -8,6 +8,8 @@ import Write from "./pages/write/Write";
 import Detail from "./pages/detail/Deatil";
 import TeamWrite from "./pages/write/TeamWrite";
 import TeamDetail from "./pages/detail/TeamDetail";
+import PostBoard from "./pages/board/PostBoard";
+import TeamPostBoard from "./pages/board/TeamPostBoard";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
             <Route path={"/"} element={<Main />}/>
             <Route path={"/signup"} element={<SignUp />}/>
             <Route path={"/login"} element={<Login />}/>
+            <Route path={"/board"} element={<PostBoard />} />
+            <Route path={"/board/team"} element={<TeamPostBoard />} />
             <Route path={"/write"} element={<Write />} />
             <Route path={"/write/team"} element={<TeamWrite />} />
             <Route path={"/detail/:id"} element={<Detail />} />
