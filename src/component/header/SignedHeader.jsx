@@ -8,7 +8,6 @@ import {setUserUp} from "../../store/userSlice";
 const SignedHeader = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const user = useSelector((state) => state.user)
     return (
         <s.GridBox>
             <div
