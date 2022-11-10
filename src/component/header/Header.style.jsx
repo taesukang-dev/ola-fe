@@ -17,8 +17,28 @@ export const SideBox = styled.div`
     padding: 10px;
 `
 
-export const LoggedBox = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
+export const LogoBox = styled.div`
+    padding: 22px;
+`
+
+export const MenuContainer = styled.div`
+    position: fixed;
+    top: 63px;
+    background: white;
+    width: 150px;
+`
+
+export const MenuBox = styled.div`
+    border-bottom: 1px solid black;
+    padding: 10px;
+    color: #808080;
+    &: hover{
+        color: #1b29f7;
+        cursor: pointer;
+        border-bottom: 1px solid #1b29f7;
+    }
+`
+
+export const AlarmBox = styled.div`
+    position: relative;
 `
