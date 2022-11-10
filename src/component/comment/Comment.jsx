@@ -1,47 +1,54 @@
 import * as s from './Comment.style'
 import Input from "../../element/Input";
 import Button from "../../element/Button";
-import {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
-import {useMutation, useQuery} from "@tanstack/react-query";
+import {useRef, useState} from "react";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {getComments, writeComment} from "../../shared/api/api";
+import Text from "../../element/Text";
+import Comments from "./Comments";
 
 const Comment = ({postId}) => {
-    const user = useSelector((state) => state.user)
+    const queryClient = useQueryClient()
+    const inputRef = useRef()
     const [content, setContent] = useState('')
     const {mutate} = useMutation((content) => writeComment(postId, content), {
         onSuccess: (data) => {
-            console.log(data)
-        }
-    })
-    useQuery(['comments'], () => getComments(postId), {
-        onSuccess: (data) => {
-            console.log(data)
-        }
-    })
+            queryClient.invalidateQueries('comments')
+            inputRef.current.value = ''
+        }})
+    const { data } = useQuery(['comments'], () => getComments(postId))
 
     const writeMutate = () => {
         if (content === '') {
             alert("입력 후 작성 버튼을 눌러주세요.")
             return
         }
-        mutate(content);
+        mutate({content: content});
     }
 
     return (
         <s.CommentContainer>
-            <s.CommentHeader>댓글</s.CommentHeader>
+            <s.CommentHeader>
+                <Text bold color={"black"}>댓글</Text>
+            </s.CommentHeader>
             <s.InputBox>
-                <Input _onChange={(e) => setContent(e.target.value)}/>
+                <Input
+                    _onChange={(e) => setContent(e.target.value)}
+                    _ref={inputRef}
+                />
                 <Button
                     margin={"10px 0px"} padding={"10px"}
                     _onClick={() => writeMutate()}
                 >작성</Button>
             </s.InputBox>
-            <s.CommentColumn>
-                <div>닉네임</div>
-                <div>내용</div>
-            </s.CommentColumn>
+            <s.CommentColumnHeader>
+                <Text>닉네임</Text>
+                <Text>내용</Text>
+            </s.CommentColumnHeader>
+            { data && <Comments
+                comment={data?.result}
+                postId={postId}
+            />}
         </s.CommentContainer>
     )
 }
