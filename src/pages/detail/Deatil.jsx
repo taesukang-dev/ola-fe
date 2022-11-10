@@ -23,7 +23,7 @@ const Detail = () => {
                     content={data?.result.content}
                 />
             }
-            <Comment postId={id} />
+            <Comment postId={id} type={"POST"}/>
             <s.ButtonBox>
                 <Button
                     type={"submit"} padding={"10px"}
