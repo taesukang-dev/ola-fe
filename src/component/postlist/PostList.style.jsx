@@ -19,7 +19,7 @@ export const TitleBox = styled(motion.div)`
     background: #fff;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 10px 0px;
     text-decoration: #04cf5d wavy underline;
 `
 
@@ -66,4 +66,50 @@ export const Column = styled.div`
     @media(max-width: 450px) {
         display: none;
     }
+`
+
+export const CardContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 10px 0px;
+`
+
+export const CardBox = styled.div`
+    width: 30%;
+    border: 0.5px solid #A0A0A0;
+    border-radius: 10px;
+    @media(max-width: 770px) {
+        width: 100%;
+    }
+    &: hover{
+        cursor: pointer;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        scale: 1.1;
+    }
+`
+
+export const CardTitleBox = styled.div`
+    padding: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+`
+
+export const CardPlaceBox = styled.div`
+    padding: 10px;
+`
+
+export const CardStatusBox = styled.div`
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px 10px 0px 0px;
+    background: ${(props) => props.warn ? "#D0312D" : "#04cf5b"};
+    text-align: right;
+`
+
+export const Number = styled.p`
+    color: white;
 `
