@@ -10,7 +10,7 @@ const MainBanner = () => {
         }}>
             <s.MainBannerBox url={climbing}/>
             <s.BannerText>
-                최고의 팀을 찾으세요!
+                등반을 위한 팀을 찾으세요!
                 <s.BannerText>
                     Ola
                 </s.BannerText>
