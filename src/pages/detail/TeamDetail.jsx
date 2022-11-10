@@ -5,6 +5,7 @@ import {useQuery} from "@tanstack/react-query";
 import {getTeamPost} from "../../shared/api/api";
 import {useEffect} from "react";
 import TeamPost from "../../component/post/TeamPost";
+import Comment from "../../component/comment/Comment";
 
 const TeamDetail = () => {
     const id = useParams().id
@@ -28,6 +29,7 @@ const TeamDetail = () => {
                 limits={data?.result.limits}
                 member={data?.result.member}
             />
+            <Comment postId={id} />
             <s.ButtonBox>
                 <Button
                     type={"submit"} padding={"10px"}

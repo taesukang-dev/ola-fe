@@ -17,7 +17,7 @@ const Detail = () => {
                 <Post
                     title={data?.result.title}
                     registeredAt={data?.result.registeredAt.split('T')[0]}
-                    userId={data?.result.user.userId}
+                    nickname={data?.result.user.nickname}
                     homeGym={data?.result.user.homeGym}
                     ageRange={data?.result.user.ageRange}
                     content={data?.result.content}
