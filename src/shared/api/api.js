@@ -24,7 +24,10 @@ export const writeComment = (postId, content) => axiosInstance.post(`/v1/posts/$
 
 export const writeCommentWithParent = (postId, parentId, content) => axiosInstance.post(`/v1/posts/${postId}/${parentId}/comments`, content).then(res => res)
 
-
 export const getComments = (postId) => axiosInstance.get(`/v1/posts/${postId}/comments`).then(res => res)
 
 export const deleteComment = (postId, commentId) => axiosInstance.delete(`/v1/posts/${postId}/${commentId}/comments`).then(res => res)
+
+export const getAlarms = () => axiosInstance.get(`/v1/posts/alarms`).then(res => res)
+
+export const deleteAlarms = (alarmId) => axiosInstance.delete(`/v1/posts/alarms/${alarmId}`).then(res => res)
