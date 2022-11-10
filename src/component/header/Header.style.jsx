@@ -5,13 +5,16 @@ export const GridBox = styled.div`
     align-items: center;
     justify-content: space-between;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 1px;
-    padding: 10px;
-    margin: 0px auto;
-    height: 36px;
+    background: white;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1;
 `
 
 export const SideBox = styled.div`
     display: flex;
+    padding: 10px;
 `
 
 export const LoggedBox = styled.div`

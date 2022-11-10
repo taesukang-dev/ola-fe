@@ -2,7 +2,7 @@ import Text from "./Text";
 import styled from "styled-components";
 
 const Input = (props) => {
-    const { label, multiLine, placeholder, type, _onChange, disabled, value } = props;
+    const { label, multiLine, placeholder, type, _onChange, disabled, value, _ref } = props;
 
     if (multiLine) {
         if (disabled) {
@@ -44,6 +44,7 @@ const Input = (props) => {
             { !disabled &&
                 <InputBox
                     placeholder={placeholder} type={type} onChange={_onChange}
+                    ref={_ref}
                 ></InputBox>
             }
         </GridBox>

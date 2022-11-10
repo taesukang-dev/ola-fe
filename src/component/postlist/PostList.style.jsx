@@ -28,9 +28,26 @@ export const Text = styled(motion.p)`
     font-weight: bold;
 `
 
-export const PostColumnBox = styled(motion.div)`
+export const TeamPostColumn = styled(motion.div)`
     display: grid;
     grid-template-columns: 0.5fr 3fr 1fr 1fr;
+    padding: 10px;
+    border-bottom: 1px solid black;
+   &: hover{
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(151,151,187,1) 35%, rgba(0,212,255,1) 100%);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+   }
+   @media(max-width: 450px) {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+`
+
+export const PostColumnBox = styled(motion.div)`
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 3fr 1fr;
     padding: 10px;
     border-bottom: 1px solid black;
    &: hover{

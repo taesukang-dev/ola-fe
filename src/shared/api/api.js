@@ -22,4 +22,9 @@ export const getTeamPostList = (page = 0) => axiosInstance.get(`/v2/posts/team?p
 
 export const writeComment = (postId, content) => axiosInstance.post(`/v1/posts/${postId}/comments`, content).then(res => res)
 
+export const writeCommentWithParent = (postId, parentId, content) => axiosInstance.post(`/v1/posts/${postId}/${parentId}/comments`, content).then(res => res)
+
+
 export const getComments = (postId) => axiosInstance.get(`/v1/posts/${postId}/comments`).then(res => res)
+
+export const deleteComment = (postId, commentId) => axiosInstance.delete(`/v1/posts/${postId}/${commentId}/comments`).then(res => res)
