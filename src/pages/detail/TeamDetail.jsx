@@ -33,6 +33,7 @@ const TeamDetail = () => {
             <s.ButtonBox>
                 <Button
                     type={"submit"} padding={"10px"}
+                    _onClick={() => navigate(`/update/team/${id}`, {state: {data: data?.result}})}
                 >수정</Button>
                 <Button
                     type={"submit"} padding={"10px"} margin={"0px 0px 0px 10px"}

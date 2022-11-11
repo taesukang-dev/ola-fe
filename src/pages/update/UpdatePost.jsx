@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import {updatePost} from "../../shared/api/api";
 
-const Update = () => {
+const UpdatePost = () => {
     const navigate = useNavigate()
     const id = useParams().id
     const location = useLocation().state.data;
@@ -23,9 +23,13 @@ const Update = () => {
             alert("자신의 글만 수정할 수 있습니다.")
             return
         }
-        if (updateTitle === location.title && updateContent === location.content) {
-            alert('아무것도 수정하지 않았습니다.')
+        if (updateTitle.replace(/ /gi, '').length === 0 || updateContent.replace(/ /gi, '').length === 0) {
+            alert('공백은 안돼요!')
             return
+        }
+        if (updateTitle === location.title && updateContent === location.content) {
+            alert('아무것도 수정하지 않았습니다.');
+            return;
         }
         mutate({
             id: id,
@@ -62,4 +66,4 @@ const Update = () => {
     )
 }
 
-export default Update
+export default UpdatePost
