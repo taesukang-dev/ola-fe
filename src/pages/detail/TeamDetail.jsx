@@ -5,9 +5,12 @@ import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {deletePost, getTeamPost} from "../../shared/api/api";
 import TeamPost from "../../component/post/TeamPost";
 import Comment from "../../component/comment/Comment";
+import {useSelector} from "react-redux";
+import UnAuthComment from "../../component/comment/UnAuthComment";
 
 const TeamDetail = () => {
     const queryClient = useQueryClient()
+    const user = useSelector((state) => state.user)
     const navigate = useNavigate()
     const id = useParams().id
     const { data } = useQuery(['post'], () => getTeamPost(id))
@@ -29,7 +32,11 @@ const TeamDetail = () => {
                 limits={data?.result.limits}
                 member={data?.result.member}
             />
-            <Comment postId={id} type={"TEAM_POST"}/>
+            {
+                user.current !== '' ?
+                    <Comment postId={id} type={"TEAM_POST"}/>
+                    : <UnAuthComment />
+            }
             <s.ButtonBox>
                 <Button
                     type={"submit"} padding={"10px"}

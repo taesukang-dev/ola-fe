@@ -1,18 +1,23 @@
 import * as s from './Detail.style'
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {deletePost, getPost} from "../../shared/api/api";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import Button from "../../element/Button";
 import Post from "../../component/post/Post";
 import Comment from "../../component/comment/Comment";
+import {useSelector} from "react-redux";
+import UnAuthComment from "../../component/comment/UnAuthComment";
+import {useEffect} from "react";
 
 const Detail = () => {
     const navigate = useNavigate()
+    const user = useSelector((state) => state.user)
     const queryClient = useQueryClient()
     const id = useParams().id
     const { data } = useQuery(['post'], () => getPost(id))
     const { mutate } = useMutation(() => deletePost(id), {
         onSuccess: (data) => queryClient.invalidateQueries('postList')})
+    const location = useLocation();
 
     return (
         <s.GridBox>
@@ -27,7 +32,11 @@ const Detail = () => {
                     content={data?.result.content}
                 />
             }
-            <Comment postId={id} type={"POST"}/>
+            {
+                user.current !== '' ?
+                 <Comment postId={id} type={"POST"}/>
+                 : <UnAuthComment />
+            }
             <s.ButtonBox>
                 <Button
                     type={"submit"} padding={"10px"}
