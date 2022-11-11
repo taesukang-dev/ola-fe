@@ -21,7 +21,10 @@ const TeamWrite = () => {
     })
 
     const writeTeamPostMutate = () => {
-        if (title === '' || content === '' || place === '' || limits === '') {
+        if (title.replace(/ /gi, '').length === 0 ||
+            content.replace(/ /gi, '').length === 0 ||
+            place.replace(/ /gi, '').length === 0 ||
+            limits.replace(/ /gi, '').length === 0) {
             alert("입력을 확인해주세요.")
             return
         }

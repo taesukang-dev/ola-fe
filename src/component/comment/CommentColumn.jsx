@@ -22,7 +22,7 @@ const CommentColumn = ({postId, commentId, childs, tab, username, nickname, cont
         }})
 
     const commentWithParentMutate = () => {
-        if (commentContent === '') {
+        if (commentContent.replace(/ /gi, '').length === 0) {
             alert('댓글을 입력하세요.')
             return
         }

@@ -35,11 +35,17 @@ const SignUp = () => {
             alert("패스워드를 확인하세요.")
             return
         }
-        if (username === '' || password === '' || passwordCheck === '' || name === '' || ageRange === '' || gender === '' || nickname === '') {
+        if (username.replace(/ /gi, '').length === 0 ||
+            password.replace(/ /gi, '').length === 0 ||
+            passwordCheck.replace(/ /gi, '').length === 0 ||
+            name.replace(/ /gi, '').length === 0 ||
+            ageRange.replace(/ /gi, '').length === 0 ||
+            gender.replace(/ /gi, '').length === 0 ||
+            nickname.replace(/ /gi, '').length === 0) {
             alert("빠짐없이 입력해주세요.")
             return
         }
-        if (homeGym === '') setHomeGym('없음')
+        if (homeGym.replace(/ /gi, '').length === 0) setHomeGym('없음')
         if (username.length < 5) {
             alert("아이디는 5글자 이상이어야 합니다.")
             return

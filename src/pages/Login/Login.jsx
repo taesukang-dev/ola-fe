@@ -34,7 +34,7 @@ const Login = () => {
         if (getCookie('x_auth')) {
             deleteCookie('x_auth')
         }
-        if (username === '' || password === '') {
+        if (username.replace(/ /gi, '').length === 0 || password.replace(/ /gi, '').length === 0) {
             alert("로그인 정보를 입력했는지 확인해주세요.");
             return;
         }

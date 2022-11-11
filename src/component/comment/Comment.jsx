@@ -19,7 +19,7 @@ const Comment = ({postId, type}) => {
     const { data } = useQuery(['comments'], () => getComments(postId))
 
     const writeMutate = () => {
-        if (content === '') {
+        if (content.replace(/ /gi, '').length === 0) {
             alert("입력 후 작성 버튼을 눌러주세요.")
             return
         }
