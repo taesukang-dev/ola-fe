@@ -12,6 +12,8 @@ export const writeTeamPost = (param) => axiosInstance.post('/v1/posts/team', par
 
 export const updatePost = (param) => axiosInstance.put(`/v1/posts`, param).then(res => res)
 
+export const updateTeamPost = (param) => axiosInstance.put(`/v1/posts/team`, param).then(res => res)
+
 export const deletePost = (postId) => axiosInstance.delete(`/v1/posts/${postId}`).then(res => res)
 
 export const getPost = (id) => axiosInstance.get(`/v2/posts/${id}`).then(res => res)
