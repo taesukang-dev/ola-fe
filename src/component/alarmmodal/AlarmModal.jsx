@@ -17,6 +17,14 @@ const AlarmModal = () => {
         }
     })
 
+    if (!data?.result.length) {
+        return(
+            <s.AlarmModal>
+                <s.AlarmColumn>알람이 없어요!</s.AlarmColumn>
+            </s.AlarmModal>
+        )
+    }
+
     return (
         <s.AlarmModal>
             {
@@ -34,13 +42,7 @@ const AlarmModal = () => {
                     </s.AlarmColumn>
                 )
             }
-            {
-                !data?.result.length &&
-                <div>
-                    알람이 없어요
-                </div>
-            }
         </s.AlarmModal>
-    )
+    );
 }
 export default AlarmModal
