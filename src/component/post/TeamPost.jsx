@@ -59,6 +59,7 @@ const TeamPost = ({id, title, registeredAt, nickname, userId, homeGym, content, 
                                     </s.MemberCard>
                                     {
                                         e.userId === user.current &&
+                                        userId !== user.current &&
                                         <Button
                                             padding={"5px 10px"}
                                             fontSize={"10px"}
@@ -75,7 +76,7 @@ const TeamPost = ({id, title, registeredAt, nickname, userId, homeGym, content, 
                     )
                 }
             </s.MemberContainer>
-            <div style={{padding: "16px"}}>
+            <div style={{padding: "16px", height: "30vh"}}>
                 {content}
             </div>
         </div>
