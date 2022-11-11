@@ -1,18 +1,18 @@
 import * as s from './Detail.style'
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Button from "../../element/Button";
-import {useQuery} from "@tanstack/react-query";
-import {getTeamPost} from "../../shared/api/api";
-import {useEffect} from "react";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import {deletePost, getTeamPost} from "../../shared/api/api";
 import TeamPost from "../../component/post/TeamPost";
 import Comment from "../../component/comment/Comment";
 
 const TeamDetail = () => {
+    const queryClient = useQueryClient()
+    const navigate = useNavigate()
     const id = useParams().id
     const { data } = useQuery(['post'], () => getTeamPost(id))
-    useEffect(() => {
-        console.log(data)
-    }, [data])
+    const { mutate } = useMutation(() => deletePost(id), {
+        onSuccess: (data) => queryClient.invalidateQueries('teamPostList')})
 
     return (
         <s.GridBox>
@@ -36,9 +36,14 @@ const TeamDetail = () => {
                 >수정</Button>
                 <Button
                     type={"submit"} padding={"10px"} margin={"0px 0px 0px 10px"}
+                    _onClick={() => {
+                        mutate()
+                        navigate("/board/team")
+                    }}
                 >삭제</Button>
                 <Button
                     type={"submit"} padding={"10px"} margin={"0px 0px 0px 10px"}
+                    _onClick={() => navigate("/board/team")}
                 >목록</Button>
             </s.ButtonBox>
         </s.GridBox>

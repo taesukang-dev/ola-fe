@@ -2,7 +2,7 @@ import Text from "./Text";
 import styled from "styled-components";
 
 const Input = (props) => {
-    const { label, multiLine, placeholder, type, _onChange, disabled, value, _ref } = props;
+    const { label, multiLine, placeholder, type, _onChange, disabled, value, _ref, defaultValue } = props;
 
     if (multiLine) {
         if (disabled) {
@@ -25,6 +25,7 @@ const Input = (props) => {
                     rows={20}
                     placeholder={placeholder}
                     onChange={_onChange}
+                    defaultValue={defaultValue}
                 >
                 </TextareaBox>
             </GridBox>
@@ -45,6 +46,7 @@ const Input = (props) => {
                 <InputBox
                     placeholder={placeholder} type={type} onChange={_onChange}
                     ref={_ref}
+                    defaultValue={defaultValue}
                 ></InputBox>
             }
         </GridBox>

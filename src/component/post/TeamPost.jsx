@@ -1,8 +1,26 @@
 import * as s from './Post.style'
 import Text from "../../element/Text";
 import AddMember from "../addmember/AddMember";
+import Button from "../../element/Button";
+import {useSelector} from "react-redux";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {deleteMember} from "../../shared/api/api";
 
 const TeamPost = ({id, title, registeredAt, nickname, userId, homeGym, content, ageRange, place, limits, member}) => {
+    const queryClient = useQueryClient()
+    const user = useSelector((state) => state.user)
+
+    const {mutate} = useMutation((memberId) => deleteMember(id, memberId), {
+        onSuccess: (data) => queryClient.invalidateQueries('post')})
+
+    const deleteMemberMutate = (id, username) => {
+        if (user.current !== username) {
+            alert("자신의 항목 외에는 취소할 수 없습니다.")
+            return
+        }
+        mutate(id);
+    }
+
     return (
         <div style={{width: "80%"}}>
             <s.TitleContainer>
@@ -30,13 +48,29 @@ const TeamPost = ({id, title, registeredAt, nickname, userId, homeGym, content, 
                 {
                     member.map((e, i) =>
                         {
-                            return (<s.MemberCard
+                            return (
+                                <s.MemberCardBox
                                 key={i}>
-                                <s.MemberBox
-                                    url={"https://m.media-amazon.com/images/M/MV5BMTgxMDkzMDM1OF5BMl5BanBnXkFtZTgwMzI3NTE2NTE@._V1_.jpg"}
-                                />
-                                {e.nickname} ({e.ageRange}대, {e.homeGym})
-                            </s.MemberCard>)
+                                    <s.MemberCard>
+                                        <s.MemberBox
+                                            url={"https://m.media-amazon.com/images/M/MV5BMTgxMDkzMDM1OF5BMl5BanBnXkFtZTgwMzI3NTE2NTE@._V1_.jpg"}
+                                        />
+                                        {e.nickname} ({e.ageRange}대, {e.homeGym})
+                                    </s.MemberCard>
+                                    {
+                                        e.userId === user.current &&
+                                        <Button
+                                            padding={"5px 10px"}
+                                            fontSize={"10px"}
+                                            bg={"#d1312d"}
+                                            color={"white"}
+                                            bold={"true"}
+                                            _onClick={() => deleteMemberMutate(e.id, e.userId)}
+                                        >
+                                            취소
+                                        </Button>
+                                    }
+                            </s.MemberCardBox>)
                         }
                     )
                 }

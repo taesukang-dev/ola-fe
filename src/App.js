@@ -10,6 +10,7 @@ import TeamWrite from "./pages/write/TeamWrite";
 import TeamDetail from "./pages/detail/TeamDetail";
 import PostBoard from "./pages/board/PostBoard";
 import TeamPostBoard from "./pages/board/TeamPostBoard";
+import Update from "./pages/update/Update";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path={"/write/team"} element={<TeamWrite />} />
             <Route path={"/detail/:id"} element={<Detail />} />
             <Route path={"/detail/team/:id"} element={<TeamDetail />} />
+            <Route path={"/update/:id"} element={<Update />} />
         </Routes>
     </>
   );

@@ -7,10 +7,10 @@ import {useNavigate} from "react-router-dom";
 
 const PostBoard = () => {
     const navigate = useNavigate()
-    const { data } = useQuery(['potsList'], () => getPostList())
+    const { data } = useQuery(['postList'], () => getPostList())
     return (
         <s.GridContainer>
-            {data && <PostList postList={data?.result} board />}
+            {data && <PostList postList={data?.result} />}
             <s.GridBox>
                 <Button
                     padding={"10px"}

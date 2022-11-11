@@ -11,7 +11,7 @@ const TeamPostBoard = () => {
 
         return (
             <s.GridContainer>
-                {data && <TeamPostList teamPostList={data.result} board={true}/>}
+                {data && <TeamPostList teamPostList={data.result}/>}
                 <s.GridBox>
                     <Button
                         padding={"10px"}

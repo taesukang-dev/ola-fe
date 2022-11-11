@@ -6,6 +6,9 @@ export const AlarmModal = styled.div`
     padding: 16px;
     right: 70px;
     border-radius: 10px;
+    width: 12rem;
+    height: 6rem;
+    overflow: auto;
 `
 
 export const AlarmColumn = styled.div`

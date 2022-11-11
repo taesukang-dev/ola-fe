@@ -43,6 +43,12 @@ export const MemberCountBox = styled.div`
     position: relative;
 `
 
+export const MemberCardBox = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+`
+
 export const MemberCard = styled.div`
     display: flex;
     gap: 10px;

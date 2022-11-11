@@ -10,11 +10,17 @@ export const write = (param) => axiosInstance.post('/v1/posts', param).then(res 
 
 export const writeTeamPost = (param) => axiosInstance.post('/v1/posts/team', param).then(res => res)
 
+export const updatePost = (param) => axiosInstance.put(`/v1/posts`, param).then(res => res)
+
+export const deletePost = (postId) => axiosInstance.delete(`/v1/posts/${postId}`).then(res => res)
+
 export const getPost = (id) => axiosInstance.get(`/v2/posts/${id}`).then(res => res)
 
 export const getTeamPost = (id) => axiosInstance.get(`/v2/posts/team/${id}`).then(res => res)
 
 export const addMember = (postId) => axiosInstance.post(`/v1/posts/team/${postId}/member`).then(res => res)
+
+export const deleteMember = (postId, memberId) => axiosInstance.delete(`/v1/posts/team/${postId}/member/${memberId}`).then(res => res)
 
 export const getPostList = (page = 0) => axiosInstance.get(`/v2/posts?page=${page}`).then(res => res)
 
