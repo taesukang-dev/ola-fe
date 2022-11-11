@@ -50,6 +50,10 @@ const Comment = ({postId, type}) => {
                 comment={data?.result}
                 postId={postId}
             />}
+            {
+                data?.result.length === 0 &&
+                <Text bold padding={"32px"}>아직 댓글이 없어요!</Text>
+            }
         </s.CommentContainer>
     )
 }
