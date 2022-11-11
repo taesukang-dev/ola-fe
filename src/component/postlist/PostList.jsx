@@ -2,23 +2,20 @@ import * as s from "./PostList.style";
 import PostColumn from "./PostColumn";
 import {useNavigate} from "react-router-dom";
 
-const PostList = ({postList, board}) => {
+const PostList = ({postList}) => {
     const navigate = useNavigate()
     return (
         <s.GridContainer>
             <s.GridBox>
                 <s.TitleBox>
-                    {
-                        !board &&
-                        <s.Text
-                            whileHover={{
-                                color: "#1b29f7",
-                                cursor: "pointer",
-                            }}
-                            onClick={() => navigate('/board')}
-                        >게시글
-                        </s.Text>
-                    }
+                    <s.Text
+                        whileHover={{
+                            color: "#1b29f7",
+                            cursor: "pointer",
+                        }}
+                        onClick={() => navigate('/board')}
+                    >게시글
+                    </s.Text>
                 </s.TitleBox>
                 {
                     postList &&
