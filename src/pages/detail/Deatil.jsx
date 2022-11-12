@@ -7,7 +7,6 @@ import Post from "../../component/post/Post";
 import Comment from "../../component/comment/Comment";
 import {useSelector} from "react-redux";
 import UnAuthComment from "../../component/comment/UnAuthComment";
-import {useEffect} from "react";
 
 const Detail = () => {
     const navigate = useNavigate()
@@ -38,17 +37,21 @@ const Detail = () => {
                  : <UnAuthComment />
             }
             <s.ButtonBox>
-                <Button
-                    type={"submit"} padding={"10px"}
-                    _onClick={() => navigate(`/update/${id}`, {state: {data: data?.result}})}
-                >수정</Button>
-                <Button
-                    type={"submit"} padding={"10px"} margin={"0px 0px 0px 10px"}
-                    _onClick={() => {
-                        mutate()
-                        navigate("/board")
-                    }}
-                >삭제</Button>
+                {
+                    user.current === data?.result.user.userId &&
+                    <>
+                        <Button
+                            type={"submit"} padding={"10px"}
+                            _onClick={() => navigate(`/update/${id}`, {state: {data: data?.result}})}
+                        >수정</Button>
+                        <Button
+                            type={"submit"} padding={"10px"} margin={"0px 0px 0px 10px"}
+                            _onClick={() => {
+                                mutate()
+                                navigate("/board")}}
+                        >삭제</Button>
+                    </>
+                }
                 <Button
                     type={"submit"} padding={"10px"} margin={"0px 0px 0px 10px"}
                     _onClick={() => navigate("/board")}

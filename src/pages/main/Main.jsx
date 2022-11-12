@@ -7,11 +7,12 @@ import MainBanner from "../../component/mainbanner/MainBanner";
 const Main = () => {
     const { data } = useQuery(['potsList'], () => getPostList())
     const teamData = useQuery(['teamPostList'], () => getTeamPostList())
+
     return(
         <>
             <MainBanner />
-            {teamData && <TeamPostList teamPostList={teamData.data?.result} count={3}/>}
-            {data && <PostList postList={data?.result}/>}
+            {teamData && <TeamPostList teamPostList={teamData.data?.result[0]} count={3}/>}
+            {data && <PostList postList={data?.result[0]}/>}
         </>
     )
 

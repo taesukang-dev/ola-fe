@@ -38,17 +38,21 @@ const TeamDetail = () => {
                     : <UnAuthComment />
             }
             <s.ButtonBox>
-                <Button
-                    type={"submit"} padding={"10px"}
-                    _onClick={() => navigate(`/update/team/${id}`, {state: {data: data?.result}})}
-                >수정</Button>
-                <Button
-                    type={"submit"} padding={"10px"} margin={"0px 0px 0px 10px"}
-                    _onClick={() => {
-                        mutate()
-                        navigate("/board/team")
-                    }}
-                >삭제</Button>
+                {
+                    user.current === data?.result.user.userId &&
+                    <>
+                        <Button
+                            type={"submit"} padding={"10px"}
+                            _onClick={() => navigate(`/update/team/${id}`, {state: {data: data?.result}})}
+                        >수정</Button>
+                        <Button
+                            type={"submit"} padding={"10px"} margin={"0px 0px 0px 10px"}
+                            _onClick={() => {
+                            mutate()
+                            navigate("/board/team")}}
+                        >삭제</Button>
+                    </>
+                }
                 <Button
                     type={"submit"} padding={"10px"} margin={"0px 0px 0px 10px"}
                     _onClick={() => navigate("/board/team")}
