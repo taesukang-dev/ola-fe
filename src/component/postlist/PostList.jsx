@@ -3,6 +3,7 @@ import PostColumn from "./PostColumn";
 import {useNavigate} from "react-router-dom";
 import {setPostPage} from "../../store/pageSlice";
 import {useDispatch} from "react-redux";
+import {setPostKeyword} from "../../store/keywordSlice";
 
 const PostList = ({postList, title="게시글"}) => {
     const navigate = useNavigate()
@@ -18,6 +19,7 @@ const PostList = ({postList, title="게시글"}) => {
                         }}
                         onClick={() => {
                             dispatch(setPostPage(0))
+                            dispatch(setPostKeyword(''))
                             navigate('/board')
                         }}
                     >{title}

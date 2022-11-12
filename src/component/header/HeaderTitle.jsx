@@ -1,9 +1,13 @@
 import * as s from './Header.style'
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {setPostPage, setTeamPostPage} from "../../store/pageSlice";
+import {setPostKeyword, setStateKeyword} from "../../store/keywordSlice";
 
 const HeaderTitle = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [viewMenu, setVieMenu] = useState(false)
     return (
         <>
@@ -19,6 +23,8 @@ const HeaderTitle = () => {
                         <s.MenuBox
                             onClick={(e) => {
                                 e.stopPropagation()
+                                dispatch(setTeamPostPage(0))
+                                dispatch(setPostKeyword(''))
                                 navigate('/board/team')
                             }}
                         >
@@ -27,6 +33,8 @@ const HeaderTitle = () => {
                         <s.MenuBox
                             onClick={(e) => {
                                 e.stopPropagation()
+                                dispatch(setPostPage(0))
+                                dispatch(setPostKeyword(''))
                                 navigate('/board')
                             }}
                         >
