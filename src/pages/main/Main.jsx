@@ -3,10 +3,15 @@ import {getPostList, getTeamPostList} from "../../shared/api/api";
 import PostList from "../../component/postlist/PostList";
 import TeamPostList from "../../component/postlist/TeamPostList";
 import MainBanner from "../../component/mainbanner/MainBanner";
+import {useEffect} from "react";
 
 const Main = () => {
     const { data } = useQuery(['potsList'], () => getPostList())
     const teamData = useQuery(['teamPostList'], () => getTeamPostList())
+
+    useEffect(() => {
+        console.log(teamData.data)
+    },[teamData])
 
     return(
         <>
