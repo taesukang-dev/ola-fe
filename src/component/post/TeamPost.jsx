@@ -42,7 +42,9 @@ const TeamPost = ({id, title, registeredAt, nickname, userId, homeGym, content, 
                     <Text>팀</Text>
                     <Text bold>( {member.length} / {limits} )</Text>
                     {
-                        limits - member.length > 0 && <AddMember id={id} userId={userId} member={member} />
+                        limits - member.length > 0 &&
+                        user.current !== userId &&
+                        <AddMember id={id} userId={userId} member={member} />
                     }
                 </s.MemberCountBox>
                 {
