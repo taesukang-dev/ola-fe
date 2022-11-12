@@ -7,15 +7,17 @@ import {useNavigate} from "react-router-dom";
 import PageButton from "../../component/pagebutton/PageButton";
 import {useSelector} from "react-redux";
 import {useEffect} from "react";
+import SearchBar from "../../component/searchbar/SearchBar";
 
 const PostBoard = () => {
     const navigate = useNavigate()
     const page = useSelector((state) => state.page)
-    const { data, refetch } = useQuery(['postList'], () => getPostList(page.post))
+    const keyword = useSelector((state) => state.keyword)
+    const { data, refetch } = useQuery(['postList'], () => getPostList(page.post, keyword.post))
 
     useEffect(() => {
         refetch()
-    }, [page])
+    }, [page, keyword])
 
     return (
         <s.GridContainer>
@@ -26,6 +28,7 @@ const PostBoard = () => {
                     _onClick={() => navigate("/write")}
                 >글작성</Button>
             </s.GridBox>
+            <SearchBar />
             {data && <PageButton buttonList={data?.result[1]} type={"post"}/>}
         </s.GridContainer>
     )
