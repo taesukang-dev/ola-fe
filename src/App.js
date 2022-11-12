@@ -12,6 +12,7 @@ import PostBoard from "./pages/board/PostBoard";
 import TeamPostBoard from "./pages/board/TeamPostBoard";
 import UpdatePost from "./pages/update/UpdatePost";
 import UpdateTeamPost from "./pages/update/UpdateTeamPost";
+import MyPage from "./pages/mypage/MyPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path={"/detail/team/:id"} element={<TeamDetail />} />
             <Route path={"/update/:id"} element={<UpdatePost />} />
             <Route path={"/update/team/:id"} element={<UpdateTeamPost />} />
+            <Route path={"/my"} element={<MyPage />} />
         </Routes>
     </>
   );

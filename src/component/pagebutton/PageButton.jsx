@@ -4,6 +4,7 @@ import {setPostPage, setTeamPostPage} from "../../store/pageSlice";
 
 const PageButton = ({buttonList, type}) => {
     const dispatch = useDispatch()
+    const page = useSelector((state) => state.page)
 
     const handlePage = (e) => {
         if (type === "post") {
@@ -21,8 +22,10 @@ const PageButton = ({buttonList, type}) => {
                         key={i}
                         margin={"0px 1px"}
                         _onClick={() => handlePage(e)}
-                    >
-                        {e + 1}
+                        warn={ type === "post"
+                                ? e === page.post ? "true" : "false"
+                                : e === page.teamPost ? "true" : "false"}
+                    >{e + 1}
                     </Button>
                 )
             }

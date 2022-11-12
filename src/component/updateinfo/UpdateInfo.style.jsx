@@ -7,3 +7,10 @@ export const GridBox = styled.div`
     flex-direction: column;
     padding: 16px;
 `
+
+export const ButtonBox = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+`

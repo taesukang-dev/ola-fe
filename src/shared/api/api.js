@@ -4,9 +4,15 @@ export const signUp = (param) => axiosInstance.post('/v1/users/join', param).the
 
 export const login = (param) => axiosInstance.post('/v1/users/login', param).then(res => res)
 
-export const userInfo = (param) => axiosInstance.get('/v1/users', param).then(res => res)
+export const userInfo = () => axiosInstance.get('/v1/users').then(res => res)
+
+export const updateUser = (param) => axiosInstance.post('/v1/users/update', param).then(res => res)
 
 export const write = (param) => axiosInstance.post('/v1/posts', param).then(res => res)
+
+export const getMyPosts = () => axiosInstance.get('/v1/posts').then(res => res)
+
+export const getMyTeamPosts = () => axiosInstance.get('/v1/posts/team').then(res => res)
 
 export const writeTeamPost = (param) => axiosInstance.post('/v1/posts/team', param).then(res => res)
 

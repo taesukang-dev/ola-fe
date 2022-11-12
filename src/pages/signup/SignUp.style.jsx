@@ -6,7 +6,6 @@ export const GridBox = styled.div`
     justify-content: center;
     flex-direction: column;
     padding: 16px;
-    background: #f5f6f7;
 `
 
 export const SelectContainer = styled.div`
@@ -16,7 +15,6 @@ export const SelectContainer = styled.div`
 export const SelectBox = styled.fieldset`
     outline: 1px solid black;
     border-radius: 5px;
-    background: white;
     display: grid;
     margin: 10px 0px;
 `

@@ -40,6 +40,7 @@ const SignedHeader = () => {
             <s.SideBox>
                 <Button
                     padding={"10px"}
+                    _onClick={() => navigate('/my')}
                 >내정보</Button>
                 <s.AlarmBox>
                     <Button
