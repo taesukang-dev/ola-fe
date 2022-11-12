@@ -30,7 +30,7 @@ export const addMember = (postId) => axiosInstance.post(`/v1/posts/team/${postId
 
 export const deleteMember = (postId, memberId) => axiosInstance.delete(`/v1/posts/team/${postId}/member/${memberId}`).then(res => res)
 
-export const getPostList = (page = 0) => axiosInstance.get(`/v2/posts?page=${page}`).then(res => res)
+export const getPostList = (page = 0, keyword = '') => axiosInstance.get(`/v2/posts?page=${page}&keyword=${keyword}`).then(res => res)
 
 export const getTeamPostList = (page = 0) => axiosInstance.get(`/v2/posts/team?page=${page}`).then(res => res)
 
