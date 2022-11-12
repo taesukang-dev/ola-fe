@@ -1,9 +1,12 @@
 import * as s from "./PostList.style";
 import TeamPostCard from "./TeamPostCard";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setTeamPostPage} from "../../store/pageSlice";
 
-const TeamPostList = ({ teamPostList, count = 10 }) => {
+const TeamPostList = ({ teamPostList, title="팀 모집", count = 10 }) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     return (
         <s.GridContainer>
             <s.GridBox>
@@ -13,8 +16,11 @@ const TeamPostList = ({ teamPostList, count = 10 }) => {
                             color: "#1b29f7",
                             cursor: "pointer",
                         }}
-                        onClick={() => navigate('/board/team')}
-                    >팀 모집
+                        onClick={() => {
+                            dispatch(setTeamPostPage(0))
+                            navigate('/board/team')
+                        }}
+                    >{title}
                     </s.Text>
                 </s.TitleBox>
                 <s.CardContainer>
