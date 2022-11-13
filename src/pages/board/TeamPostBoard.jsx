@@ -7,15 +7,18 @@ import {useNavigate} from "react-router-dom";
 import PageButton from "../../component/pagebutton/PageButton";
 import {useSelector} from "react-redux";
 import {useEffect} from "react";
+import SearchBar from "../../component/searchbar/SearchBar";
 
 const TeamPostBoard = () => {
     const navigate = useNavigate()
     const page = useSelector((state) => state.page)
-    const {data, refetch} = useQuery(['teamPostList'], () => getTeamPostList(page.teamPost))
+    const keyword = useSelector((state) => state.keyword)
+    const place = useSelector((state) => state.keyword)
+    const {data, refetch} = useQuery(['teamPostList'], () => getTeamPostList(page.teamPost, keyword.teamPost, place.place))
 
     useEffect(() => {
         refetch()
-    }, [page])
+    }, [page, keyword.teamPost])
 
         return (
             <s.GridContainer>
@@ -26,6 +29,7 @@ const TeamPostBoard = () => {
                         _onClick={() => navigate("/write/team")}
                     >글작성</Button>
                 </s.GridBox>
+                <SearchBar type={"teamPost"}/>
                 {data && <PageButton buttonList={data?.result[1]} type={"teamPost"}/>}
             </s.GridContainer>
         )

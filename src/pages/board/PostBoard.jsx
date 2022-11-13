@@ -28,7 +28,7 @@ const PostBoard = () => {
                     _onClick={() => navigate("/write")}
                 >글작성</Button>
             </s.GridBox>
-            <SearchBar />
+            <SearchBar type={"post"}/>
             {data && <PageButton buttonList={data?.result[1]} type={"post"}/>}
         </s.GridContainer>
     )

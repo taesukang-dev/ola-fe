@@ -3,6 +3,7 @@ import TeamPostCard from "./TeamPostCard";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setTeamPostPage} from "../../store/pageSlice";
+import {setPlace, setTeamPostKeyword} from "../../store/keywordSlice";
 
 const TeamPostList = ({ teamPostList, title="팀 모집", count = 10 }) => {
     const navigate = useNavigate()
@@ -17,8 +18,10 @@ const TeamPostList = ({ teamPostList, title="팀 모집", count = 10 }) => {
                             cursor: "pointer",
                         }}
                         onClick={() => {
-                            dispatch(setTeamPostPage(0))
                             navigate('/board/team')
+                            dispatch(setTeamPostPage(0))
+                            dispatch(setTeamPostKeyword(''))
+                            dispatch(setPlace(''))
                         }}
                     >{title}
                     </s.Text>
