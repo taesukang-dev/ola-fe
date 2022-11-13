@@ -106,7 +106,9 @@ export const CardStatusBox = styled.div`
     font-weight: bold;
     padding: 10px;
     border-radius: 10px 10px 0px 0px;
-    background: ${(props) => props.warn ? "#D0312D" : "#04cf5b"};
+    background: ${(props) => props.status
+                                ? "#808080" :
+                                props.warn ? "#D0312D" : "#04cf5b"};
     text-align: right;
 `
 

@@ -8,6 +8,7 @@ import {setPlace, setTeamPostKeyword} from "../../store/keywordSlice";
 const TeamPostList = ({ teamPostList, title="팀 모집", count = 10 }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
     return (
         <s.GridContainer>
             <s.GridBox>
@@ -35,10 +36,11 @@ const TeamPostList = ({ teamPostList, title="팀 모집", count = 10 }) => {
                                     <TeamPostCard
                                         key={i}
                                         id={e.id}
+                                        status={e.status}
                                         title={e.title}
                                         place={e.place}
                                         limits={e.limits}
-                                        numMember={e.member.length}
+                                        members={e.member}
                                     />
                                     : ''
                         )
