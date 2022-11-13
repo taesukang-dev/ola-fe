@@ -32,7 +32,7 @@ export const deleteMember = (postId, memberId) => axiosInstance.delete(`/v1/post
 
 export const getPostList = (page = 0, keyword = '') => axiosInstance.get(`/v2/posts?page=${page}&keyword=${keyword}`).then(res => res)
 
-export const getTeamPostList = (page = 0) => axiosInstance.get(`/v2/posts/team?page=${page}`).then(res => res)
+export const getTeamPostList = (page = 0, keyword = '', place = '') => axiosInstance.get(`/v2/posts/team?page=${page}&keyword=${keyword}&place=${place}`).then(res => res)
 
 export const writeComment = (postId, content) => axiosInstance.post(`/v1/posts/${postId}/comments`, content).then(res => res)
 
