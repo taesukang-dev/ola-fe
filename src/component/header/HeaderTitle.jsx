@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {setPostPage, setTeamPostPage} from "../../store/pageSlice";
-import {setPostKeyword, setStateKeyword} from "../../store/keywordSlice";
+import {setPlace, setPostKeyword, setStateKeyword, setTeamPostKeyword} from "../../store/keywordSlice";
 
 const HeaderTitle = () => {
     const navigate = useNavigate()
@@ -24,7 +24,8 @@ const HeaderTitle = () => {
                             onClick={(e) => {
                                 e.stopPropagation()
                                 dispatch(setTeamPostPage(0))
-                                dispatch(setPostKeyword(''))
+                                dispatch(setTeamPostKeyword(''))
+                                dispatch(setPlace(''))
                                 navigate('/board/team')
                             }}
                         >
