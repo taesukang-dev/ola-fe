@@ -39,6 +39,7 @@ export const MemberBox = styled.div`
 
 export const MemberCountBox = styled.div`
     display: flex;
+    align-items: center;
     gap: 10px;
     position: relative;
 `
