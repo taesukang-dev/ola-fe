@@ -7,6 +7,7 @@ import TeamPost from "../../component/post/TeamPost";
 import Comment from "../../component/comment/Comment";
 import {useSelector} from "react-redux";
 import UnAuthComment from "../../component/comment/UnAuthComment";
+import {useEffect} from "react";
 
 const TeamDetail = () => {
     const queryClient = useQueryClient()
@@ -21,7 +22,9 @@ const TeamDetail = () => {
         <s.GridBox>
             <TeamPost
                 id={id}
+                postUser={data?.result.user}
                 title={data?.result.title}
+                status={data?.result.status}
                 registeredAt={data?.result.registeredAt.split('T')[0]}
                 nickname={data?.result.user.nickname}
                 userId={data?.result.user.userId}
