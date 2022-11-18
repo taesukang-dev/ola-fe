@@ -3,8 +3,10 @@ import Button from "../../element/Button";
 import {useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 import {setPlace, setPostKeyword, setTeamPostKeyword} from "../../store/keywordSlice";
+import {useQueryClient} from "@tanstack/react-query";
 
 const SearchBar = ({type}) => {
+    const queryClient = useQueryClient()
     const dispatch = useDispatch()
     const inputRef = useRef()
     const [keyword, setKeyword] = useState('')
@@ -16,9 +18,11 @@ const SearchBar = ({type}) => {
         }
         if (type === "post") {
             inputRef.current.value = ''
+            queryClient.invalidateQueries('postList')
             dispatch(setPostKeyword(keyword));
         } else {
             inputRef.current.value = ''
+            queryClient.invalidateQueries('teamPostList')
             dispatch(setTeamPostKeyword(keyword))
         }
     }
