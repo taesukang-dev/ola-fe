@@ -21,7 +21,7 @@ const PostBoard = () => {
 
     return (
         <s.GridContainer>
-            {data && <PostList postList={data?.result[0]} />}
+            {data && <PostList postList={data?.result.contents} />}
             <s.GridBox>
                 <Button
                     padding={"10px"}
@@ -29,7 +29,7 @@ const PostBoard = () => {
                 >글작성</Button>
             </s.GridBox>
             <SearchBar type={"post"}/>
-            {data && <PageButton buttonList={data?.result[1]} type={"post"}/>}
+            {data && <PageButton buttonList={data?.result.pageList} type={"post"}/>}
         </s.GridContainer>
     )
 }
