@@ -11,8 +11,8 @@ const Main = () => {
     return(
         <>
             <MainBanner />
-            {teamData && <TeamPostList teamPostList={teamData.data?.result[0]} count={3}/>}
-            {data && <PostList postList={data?.result[0]}/>}
+            {teamData && <TeamPostList teamPostList={teamData.data?.result.contents} count={3}/>}
+            {data && <PostList postList={data?.result.contents}/>}
         </>
     )
 
