@@ -7,6 +7,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {confirmTeam, deleteMember} from "../../shared/api/api";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
+import WaitList from "../waitlist/WaitList";
 
 const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, content, ageRange, place, limits, member}) => {
     const queryClient = useQueryClient()
@@ -64,11 +65,6 @@ const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, c
                 <s.MemberCountBox>
                     <Text>팀</Text>
                     <Text bold>( {member.length} / {limits} )</Text>
-                    {
-                        limits - member.length > 0 &&
-                        user.current !== userId &&
-                        <AddMember id={id} userId={userId} member={member} />
-                    }
                     {
                         limits - member.length === 0 &&
                         user.current === userId &&
@@ -130,6 +126,7 @@ const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, c
                     )
                 }
             </s.MemberContainer>
+            <WaitList id={id} userId={userId} limits={limits} member={member}/>
             <div style={{padding: "16px", height: "30vh"}}>
                 {content}
             </div>
