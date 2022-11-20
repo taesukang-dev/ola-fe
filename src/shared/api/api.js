@@ -26,7 +26,13 @@ export const getPost = (id) => axiosInstance.get(`/v2/posts/${id}`).then(res => 
 
 export const getTeamPost = (id) => axiosInstance.get(`/v2/posts/team/${id}`).then(res => res)
 
-export const addMember = (postId) => axiosInstance.post(`/v1/posts/team/${postId}/member`).then(res => res)
+export const addMember = (postId, memberId) => axiosInstance.post(`/v1/posts/team/${postId}/member/${memberId}`).then(res => res)
+
+export const addWait = (postId) => axiosInstance.post(`/v1/posts/team/${postId}/wait`).then(res => res)
+
+export const getWaitList = (postId) => axiosInstance.get(`/v1/posts/team/${postId}/wait`).then(res => res)
+
+export const deleteWaitListMember = (postId, memberId) => axiosInstance.delete(`/v1/posts/team/${postId}/wait/${memberId}`).then(res => res)
 
 export const confirmTeam = (postId) => axiosInstance.get(`/v1/posts/team/${postId}/confirm`).then(res => res)
 
