@@ -1,32 +1,32 @@
 import PlusButton from "../../element/PlusButton";
 import styled from "styled-components";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Button from "../../element/Button";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {addMember} from "../../shared/api/api";
+import {addWait} from "../../shared/api/api";
 import {useSelector} from "react-redux";
 
-const AddMember = ({id, userId, member}) => {
+const AddMember = ({id, userId, member, waitList}) => {
     const queryClient = useQueryClient()
     const user = useSelector((state) => state.user)
     const [modal, setModal] = useState(false)
-    const {mutate} = useMutation((id) => addMember(id), {
+    const {mutate} = useMutation((id) => addWait(id), {
         onSuccess: (data) => {
-            alert('참여가 완료되었습니다.')
+            alert('대기열 참여가 완료되었습니다.')
             queryClient.invalidateQueries('post')
             setModal(!modal)
         }
     })
 
-    const addMemberMutate = () => {
+    const addWaitMutate = () => {
         if (user.current === userId) {
             alert("자신의 모집에는 참가할 수 없습니다.")
             return
         }
         let flag = false
-        member.filter(e => e.userId === user.current ? flag = true : flag)
+        waitList.filter(e => e.userId === user.current ? flag = true : flag)
         if (flag) {
-            alert('이미 참가한 모집입니다.')
+            alert('이미 참가한 대기열입니다.')
             return
         }
         mutate(id);
@@ -47,13 +47,13 @@ const AddMember = ({id, userId, member}) => {
                         fontWeight: "bold"
                     }}
                     >
-                        팀에 참여하시겠어요?
+                        대기열에 참여하시겠어요?
                     </div>
                     <div>
                         <Button
                             bold={"true"}
                             padding={"10px"}
-                            _onClick={() => addMemberMutate()}
+                            _onClick={() => addWaitMutate()}
                         >확인</Button>
                         <Button
                             _onClick={() => setModal(!modal)}
@@ -68,8 +68,6 @@ const AddMember = ({id, userId, member}) => {
 }
 
 const ButtonContainer = styled.div`
-    position: absolute;
-    right: 0;
     cursor: pointer;
 `
 
