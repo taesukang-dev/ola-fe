@@ -1,6 +1,5 @@
 import * as s from './Post.style'
 import Text from "../../element/Text";
-import AddMember from "../addmember/AddMember";
 import Button from "../../element/Button";
 import {useSelector} from "react-redux";
 import {useMutation, useQueryClient} from "@tanstack/react-query";

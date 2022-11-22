@@ -3,29 +3,36 @@ import Input from "../../element/Input";
 import {useSelector} from "react-redux";
 import Button from "../../element/Button";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import {write} from "../../shared/api/api";
+import FileUpload from "../../component/fileupload/FileUpload";
+import s3Upload from "../../shared/S3Upload";
 
 const Write = () => {
+    const file = useSelector((state) => state.file)
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
-    const {mutate} = useMutation(() => write({
+    const {mutate} = useMutation((imgUri) => write({
         title: title,
         content: content,
-        username: user.current
+        username: user.current,
+        imgUri: imgUri
     }), {
         onSuccess: (data) => navigate(`/detail/${data.result.id}`) })
 
-    const writeMutate = () => {
+    const writeMutate = async () => {
         if (title !== '' && content !== '') {
-            mutate();
+            const imgUri = await s3Upload(file.file)
+            console.log(imgUri)
+            mutate(imgUri)
         } else {
             alert('입력을 확인해주세요.')
         }
     }
+
     return (
         <s.GridBox>
             <div style={{width: "80%"}}>
@@ -34,6 +41,7 @@ const Write = () => {
                     label={"제목"}
                     _onChange={(e) => setTitle(e.target.value)}
                 />
+                <FileUpload />
                 <Input
                     multiLine label={"내용"}
                     _onChange={(e) => setContent(e.target.value)}

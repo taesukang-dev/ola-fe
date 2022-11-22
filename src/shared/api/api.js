@@ -30,7 +30,7 @@ export const addMember = (postId, memberId) => axiosInstance.post(`/v1/posts/tea
 
 export const addWait = (postId) => axiosInstance.post(`/v1/posts/team/${postId}/wait`).then(res => res)
 
-export const getWaitList = (postId) => axiosInstance.get(`/v1/posts/team/${postId}/wait`).then(res => res)
+export const getWaitList = (postId) => axiosInstance.get(`/v2/posts/team/${postId}/wait`).then(res => res)
 
 export const deleteWaitListMember = (postId, memberId) => axiosInstance.delete(`/v1/posts/team/${postId}/wait/${memberId}`).then(res => res)
 

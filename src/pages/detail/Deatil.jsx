@@ -7,6 +7,7 @@ import Post from "../../component/post/Post";
 import Comment from "../../component/comment/Comment";
 import {useSelector} from "react-redux";
 import UnAuthComment from "../../component/comment/UnAuthComment";
+import {useEffect} from "react";
 
 const Detail = () => {
     const navigate = useNavigate()
@@ -16,8 +17,7 @@ const Detail = () => {
     const { data } = useQuery(['post'], () => getPost(id))
     const { mutate } = useMutation(() => deletePost(id), {
         onSuccess: (data) => queryClient.invalidateQueries('postList')})
-    const location = useLocation();
-
+    
     return (
         <s.GridBox>
             {
@@ -29,6 +29,7 @@ const Detail = () => {
                     homeGym={data?.result.user.homeGym}
                     ageRange={data?.result.user.ageRange}
                     content={data?.result.content}
+                    imgUri={data?.result.imgUri}
                 />
             }
             {
