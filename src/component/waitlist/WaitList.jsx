@@ -46,6 +46,21 @@ const WaitList = ({id, member, userId, limits}) => {
                                     {e.nickname} ({e.ageRange}대, {e.homeGym})
                                 </s.MemberCard>
                                 {
+                                    limits - member.length > 0 &&
+                                    userId === user.current &&
+                                    e.userId !== user.current &&
+                                    <Button
+                                        padding={"5px 10px"}
+                                        fontSize={"10px"}
+                                        bg={"#d1312d"}
+                                        color={"white"}
+                                        bold={"true"}
+                                        _onClick={() => addMemberMutate.mutate(e.id)}
+                                    >
+                                        합류
+                                    </Button>
+                                }
+                                {
                                     (e.userId === user.current ||
                                     userId === user.current) &&
                                     <Button
@@ -59,22 +74,6 @@ const WaitList = ({id, member, userId, limits}) => {
                                         취소
                                     </Button>
                                 }
-                                {
-                                    limits - member.length > 0 &&
-                                    userId === user.current &&
-                                    e.userId !== user.current &&
-                                        <Button
-                                            padding={"5px 10px"}
-                                            fontSize={"10px"}
-                                            bg={"#d1312d"}
-                                            color={"white"}
-                                            bold={"true"}
-                                            _onClick={() => addMemberMutate.mutate(e.id)}
-                                        >
-                                            합류
-                                        </Button>
-                                }
-
                             </s.MemberCardBox>)
                     })
                 }

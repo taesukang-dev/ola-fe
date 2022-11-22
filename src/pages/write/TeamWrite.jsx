@@ -33,7 +33,10 @@ const TeamWrite = () => {
             alert("입력을 확인해주세요.")
             return
         }
-        const imgUri = await s3Upload(file.file)
+        let imgUri = '';
+        if (file.file !== '') {
+            imgUri = await s3Upload(file.file)
+        }
 
         mutate({
             title: title,

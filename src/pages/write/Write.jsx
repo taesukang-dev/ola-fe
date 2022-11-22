@@ -27,7 +27,10 @@ const Write = () => {
 
     const writeMutate = async () => {
         if (title !== '' && content !== '') {
-            const imgUri = await s3Upload(file.file)
+            let imgUri = '';
+            if (file.file !== '') {
+                imgUri = await s3Upload(file.file)
+            }
             console.log(imgUri)
             mutate(imgUri)
             dispatch(setFile(''))

@@ -3,7 +3,7 @@ import Button from "../../element/Button";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteCookie, getCookie} from "../../shared/Cookie";
-import {setUserUp} from "../../store/userSlice";
+import {setUserPosition, setUserUp} from "../../store/userSlice";
 import HeaderTitle from "./HeaderTitle";
 import AlarmModal from "../alarmmodal/AlarmModal";
 import {useEffect, useState} from "react";
@@ -14,6 +14,7 @@ const SignedHeader = () => {
     const navigate = useNavigate()
     const alarm = useSelector((state) => state.alarm)
     const [warn, setWarn] = useState("false")
+    const user = useSelector((state) => state.user.position)
 
     useEffect(() => {
         const eventSource = new EventSource("http://localhost:8080/api/v1/users/alarm/subscribe?token=" + getCookie('x_auth').split(' ')[1])
@@ -32,6 +33,13 @@ const SignedHeader = () => {
             }
             eventSource.close();
         });
+
+        navigator.geolocation.getCurrentPosition((pos) => {
+            let latitude = pos.coords.latitude;
+            let longitude = pos.coords.longitude;
+            console.log("현재 위치는 : " + latitude + ", "+ longitude);
+            dispatch(setUserPosition({x: latitude, y: longitude}))
+        })
     }, [])
 
     return (
