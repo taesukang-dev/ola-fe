@@ -41,7 +41,7 @@ const WaitList = ({id, member, userId, limits}) => {
                                 key={i}>
                                 <s.MemberCard>
                                     <s.MemberBox
-                                        url={"https://m.media-amazon.com/images/M/MV5BMTgxMDkzMDM1OF5BMl5BanBnXkFtZTgwMzI3NTE2NTE@._V1_.jpg"}
+                                        url={`${process.env.REACT_APP_AWS_PATH}/${e.imgUri}`}
                                     />
                                     {e.nickname} ({e.ageRange}대, {e.homeGym})
                                 </s.MemberCard>
