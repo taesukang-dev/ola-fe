@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import WaitList from "../waitlist/WaitList";
 
-const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, content, ageRange, place, limits, member}) => {
+const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, content, ageRange, place, limits, member, imgUri}) => {
     const queryClient = useQueryClient()
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
@@ -85,7 +85,7 @@ const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, c
                                 key={i}>
                                     <s.MemberCard>
                                         <s.MemberBox
-                                            url={"https://m.media-amazon.com/images/M/MV5BMTgxMDkzMDM1OF5BMl5BanBnXkFtZTgwMzI3NTE2NTE@._V1_.jpg"}
+                                            url={`${process.env.REACT_APP_AWS_PATH}/${e.imgUri}`}
                                         />
                                         {e.nickname} ({e.ageRange}대, {e.homeGym})
                                     </s.MemberCard>
@@ -127,7 +127,16 @@ const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, c
             </s.MemberContainer>
             <WaitList id={id} userId={userId} limits={limits} member={member}/>
             <div style={{padding: "16px", height: "30vh"}}>
-                {content}
+                {
+                    imgUri &&
+                    <img
+                        width={"100%"}
+                        height={"80%"}
+                        src={`${process.env.REACT_APP_AWS_PATH}/${imgUri}`} />
+                }
+                <div>
+                    {content}
+                </div>
             </div>
         </div>
     )

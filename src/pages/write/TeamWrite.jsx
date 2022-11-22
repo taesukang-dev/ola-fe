@@ -1,16 +1,21 @@
 import * as s from './Write.style'
 import Input from "../../element/Input";
 import Button from "../../element/Button";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Text from "../../element/Text";
 import {useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import {writeTeamPost} from "../../shared/api/api";
 import {useNavigate} from "react-router-dom";
+import FileUpload from "../../component/fileupload/FileUpload";
+import s3Upload from "../../shared/S3Upload";
+import {setFile} from "../../store/fileSlice";
 
 const TeamWrite = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
+    const file = useSelector((state) => state.file)
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const [place, setPlace] = useState('')
@@ -20,7 +25,7 @@ const TeamWrite = () => {
         onSuccess: (data) => navigate(`/detail/team/${data.result.id}`)
     })
 
-    const writeTeamPostMutate = () => {
+    const writeTeamPostMutate = async () => {
         if (title.replace(/ /gi, '').length === 0 ||
             content.replace(/ /gi, '').length === 0 ||
             place.replace(/ /gi, '').length === 0 ||
@@ -28,13 +33,18 @@ const TeamWrite = () => {
             alert("입력을 확인해주세요.")
             return
         }
+        const imgUri = await s3Upload(file.file)
+
         mutate({
             title: title,
             content: content,
             place: place,
             limits: limits,
-            username: user.current
+            username: user.current,
+            imgUri: imgUri
         });
+
+        dispatch(setFile(''))
     }
 
     return (
@@ -49,6 +59,7 @@ const TeamWrite = () => {
                     label={"장소"}
                     _onChange={(e) => setPlace(e.target.value)}
                 />
+                <FileUpload />
                 <s.SelectContainer onChange={(e) => setLimits(e.target.value)}>
                     <Text bold>인원</Text>
                     <s.SelectBox >
