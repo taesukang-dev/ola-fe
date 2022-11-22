@@ -40,17 +40,13 @@ const FileUpload = ({src=''}) => {
         />
         {
             preview !== '' &&
-            <img
-                width={"100%"}
-                height={"80%"}
-                src={preview} alt={"none"}/>
+            <img width={"100px"} src={preview} alt={"none"}/>
         }
         {
             src &&
             preview === '' &&
             <img
-                width={"100%"}
-                height={"80%"}
+                width={"100px"}
                 src={src} alt={"none"}/>
         }
     </>
