@@ -2,15 +2,17 @@ import {useLocation, useNavigate, useParams} from "react-router-dom";
 import Input from "../../element/Input";
 import * as s from './Update.style'
 import Button from "../../element/Button";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import {updatePost} from "../../shared/api/api";
 import Text from "../../element/Text";
 import s3Upload from "../../shared/S3Upload";
 import FileUpload from "../../component/fileupload/FileUpload";
+import {setFile} from "../../store/fileSlice";
 
 const UpdatePost = () => {
+    const dispatch = useDispatch()
     const file = useSelector((state) => state.file)
     const navigate = useNavigate()
     const id = useParams().id
@@ -36,14 +38,18 @@ const UpdatePost = () => {
             return;
         }
 
-        const imgUri = await s3Upload(file.file)
+        let imgUri = '';
+        if (file.file !== '') {
+            imgUri = await s3Upload(file.file)
+        }
 
         mutate({
             id: id,
             title: updateTitle,
             content: updateContent,
-            imgUri: imgUri
+            imgUri: imgUri === '' ? location.imgUri : imgUri
         });
+        dispatch(setFile(''))
     }
 
     return (

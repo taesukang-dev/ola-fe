@@ -1,6 +1,6 @@
 import * as s from './Write.style'
 import Input from "../../element/Input";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Button from "../../element/Button";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -8,8 +8,10 @@ import {useMutation} from "@tanstack/react-query";
 import {write} from "../../shared/api/api";
 import FileUpload from "../../component/fileupload/FileUpload";
 import s3Upload from "../../shared/S3Upload";
+import {setFile} from "../../store/fileSlice";
 
 const Write = () => {
+    const dispatch = useDispatch()
     const file = useSelector((state) => state.file)
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
@@ -28,6 +30,7 @@ const Write = () => {
             const imgUri = await s3Upload(file.file)
             console.log(imgUri)
             mutate(imgUri)
+            dispatch(setFile(''))
         } else {
             alert('입력을 확인해주세요.')
         }
