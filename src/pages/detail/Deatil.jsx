@@ -1,5 +1,5 @@
 import * as s from './Detail.style'
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import {deletePost, getPost} from "../../shared/api/api";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import Button from "../../element/Button";
@@ -7,7 +7,6 @@ import Post from "../../component/post/Post";
 import Comment from "../../component/comment/Comment";
 import {useSelector} from "react-redux";
 import UnAuthComment from "../../component/comment/UnAuthComment";
-import {useEffect} from "react";
 
 const Detail = () => {
     const navigate = useNavigate()

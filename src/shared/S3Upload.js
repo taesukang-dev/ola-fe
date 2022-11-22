@@ -2,7 +2,7 @@ import AWS from "aws-sdk";
 import {v1} from "uuid";
 
 const S3Upload = async (file) => {
-    let uri;
+    let uri = '';
     const upload = new AWS.S3.ManagedUpload({
         params: {
             Bucket: process.env.REACT_APP_AWS_BUCKET,

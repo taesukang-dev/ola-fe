@@ -17,7 +17,9 @@ const TeamDetail = () => {
     const { data } = useQuery(['post'], () => getTeamPost(id))
     const { mutate } = useMutation(() => deletePost(id), {
         onSuccess: (data) => queryClient.invalidateQueries('teamPostList')})
-
+    useEffect(() => {
+        console.log(data)
+    }, [data])
     return (
         <s.GridBox>
             <TeamPost
@@ -34,6 +36,7 @@ const TeamDetail = () => {
                 place={data?.result.place}
                 limits={data?.result.limits}
                 member={data?.result.member}
+                imgUri={data?.result.imgUri}
             />
             {
                 user.current !== '' ?

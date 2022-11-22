@@ -4,11 +4,16 @@ import Input from "../../element/Input";
 import * as s from './Update.style'
 import Text from "../../element/Text";
 import Button from "../../element/Button";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useMutation} from "@tanstack/react-query";
 import {updateTeamPost} from "../../shared/api/api";
+import FileUpload from "../../component/fileupload/FileUpload";
+import s3Upload from "../../shared/S3Upload";
+import {setFile} from "../../store/fileSlice";
 
 const UpdateTeamPost = () => {
+    const dispatch = useDispatch()
+    const file = useSelector((state) => state.file)
     const navigate = useNavigate()
     const id = useParams().id
     const user = useSelector((state) => state.user)
@@ -21,7 +26,7 @@ const UpdateTeamPost = () => {
     const {mutate} = useMutation((param) => updateTeamPost(param), {
         onSuccess: (data) => navigate(`/detail/team/${id}`) })
 
-    const teamPostUpdateMutate = () => {
+    const teamPostUpdateMutate = async () => {
         if (updateTitle.replace(/ /gi, '').length === 0 ||
             updatePlace.replace(/ /gi, '').length === 0 ||
             updateContent.replace(/ /gi, '').length === 0) {
@@ -35,13 +40,20 @@ const UpdateTeamPost = () => {
             alert('수정되지 않았습니다.')
             return
         }
+        let imgUri = '';
+        if (file.file !== '') {
+             imgUri = await s3Upload(file.file)
+        }
+
         mutate({
             id: id,
             title: updateTitle,
             content: updateContent,
             place: updatePlace,
-            limits: updateLimits
+            limits: updateLimits,
+            imgUri: imgUri === '' ? location.imgUri : imgUri
         });
+        dispatch(setFile(''))
     }
 
     return (
@@ -58,6 +70,9 @@ const UpdateTeamPost = () => {
                     defaultValue={location.place}
                     _onChange={(e) => setUpdatePlace(e.target.value)}
                 />
+                <div>
+                    <FileUpload src={`${process.env.REACT_APP_AWS_PATH}/${location.imgUri}`} />
+                </div>
                 <s.SelectContainer onChange={(e) => setUpdateLimits(e.target.value)}>
                     <Text bold>인원</Text>
                     <s.SelectBox>

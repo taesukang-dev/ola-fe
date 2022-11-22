@@ -6,8 +6,14 @@ import {useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import {signUp} from "../../shared/api/api";
 import {useNavigate} from "react-router-dom";
+import FileUpload from "../../component/fileupload/FileUpload";
+import {setFile} from "../../store/fileSlice";
+import {useDispatch, useSelector} from "react-redux";
+import s3Upload from "../../shared/S3Upload";
 
 const SignUp = () => {
+    const dispatch = useDispatch()
+    const file = useSelector((state) => state.file)
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -18,19 +24,11 @@ const SignUp = () => {
     const [nickname, setNickname] = useState('')
     const [homeGym, setHomeGym] = useState('')
 
-    const { mutate, isLoading, isSuccess, isError } = useMutation(() => signUp({
-        username: username,
-        password: password,
-        nickname: nickname,
-        name: name,
-        ageRange: ageRange,
-        homeGym: homeGym,
-        gender: gender
-    }), {
+    const { mutate, isLoading, isSuccess, isError } = useMutation((param) => signUp(param), {
         onSuccess: (data) => navigate('/login')
     })
 
-    const signUpMutate = () => {
+    const signUpMutate = async () => {
         if (password !== passwordCheck) {
             alert("패스워드를 확인하세요.")
             return
@@ -50,7 +48,23 @@ const SignUp = () => {
             alert("아이디는 5글자 이상이어야 합니다.")
             return
         }
-        mutate();
+
+        let imgUri = '';
+        if (file.file !== '') {
+            imgUri = await s3Upload(file.file)
+        }
+
+        mutate({
+            username: username,
+            imgUri: imgUri,
+            password: password,
+            nickname: nickname,
+            name: name,
+            ageRange: ageRange,
+            homeGym: homeGym,
+            gender: gender,
+        });
+        dispatch(setFile(''))
     }
 
     return (
@@ -60,6 +74,7 @@ const SignUp = () => {
                 <Input
                     _onChange={(e) => setUsername(e.target.value)}
                     label={"아이디"}/>
+                <FileUpload />
                 <Input
                     type={"password"} label={"패스워드"}
                     _onChange={(e) => setPassword(e.target.value)}
