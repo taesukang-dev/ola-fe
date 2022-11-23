@@ -9,15 +9,17 @@ import FileUpload from "../fileupload/FileUpload";
 import {setFile} from "../../store/fileSlice";
 import s3Upload from "../../shared/S3Upload";
 import {useDispatch, useSelector} from "react-redux";
+import SearchHomeyGym from "../searchhomegym/SearchHomeyGym";
+import {setSignUpPlace} from "../../store/userSlice";
 
 const UpdateInfo = () => {
     const dispatch = useDispatch()
     const queryClient = useQueryClient()
+    const userPlace = useSelector((state) => state.user.place)
     const file = useSelector((state) => state.file)
     const {data} = useQuery(['user'], () => userInfo())
     const [updateName, setUpdateName] = useState('')
     const [updateNickname, setUpdateNickname] = useState('')
-    const [updateHomeGym, setUpdateHomeGym] = useState('')
 
     const {mutate} = useMutation((param) => updateUser(param), {
         onSuccess: (data) => {
@@ -28,19 +30,17 @@ const UpdateInfo = () => {
     useEffect(() => {
         setUpdateName(data?.result.name)
         setUpdateNickname(data?.result.nickname)
-        setUpdateHomeGym(data?.result.homeGym)
     },[data])
 
     const userUpdateMutate = async () => {
         if (updateName.replace(/ /gi, '').length === 0 ||
-            updateNickname.replace(/ /gi, '').length === 0 ||
-            updateHomeGym.replace(/ /gi, '').length === 0) {
+            updateNickname.replace(/ /gi, '').length === 0) {
             alert('공백은 불가합니다.')
             return
         }
         if (updateName === data?.result.name &&
             updateNickname === data?.result.nickname &&
-            updateHomeGym === data?.result.homeGym) {
+            userPlace.placeName === '') {
             alert('수정되지 않았습니다.')
             return
         }
@@ -53,10 +53,17 @@ const UpdateInfo = () => {
         mutate({
             name: updateName,
             nickname: updateNickname,
-            homeGym: updateHomeGym,
+            homeGymRequest: userPlace,
             imgUri: imgUri === '' ? data?.result.imgUri : imgUri
         });
         dispatch(setFile(''))
+        dispatch(setSignUpPlace({
+            placeName: '',
+            roadAddressName: '',
+            categoryName: '',
+            x: '',
+            y: ''
+        }))
     }
 
 
@@ -81,11 +88,10 @@ const UpdateInfo = () => {
                     defaultValue={data?.result.nickname}
                     _onChange={(e) => setUpdateNickname(e.target.value)}
                 />
-                <Input
-                    label={"홈짐 혹은 자주 가는 암장"}
-                    defaultValue={data?.result.homeGym}
-                    _onChange={(e) => setUpdateHomeGym(e.target.value)}
-                />
+                {
+                    data &&
+                    <SearchHomeyGym updateParam={data?.result.homeGym.placeName} />
+                }
             </div>
             <s.ButtonBox>
                 <Button

@@ -15,6 +15,5 @@ const Main = () => {
             {data && <PostList postList={data?.result.contents}/>}
         </>
     )
-
 }
 export default Main
