@@ -30,10 +30,10 @@ const TeamDetail = () => {
                 registeredAt={data?.result.registeredAt.split('T')[0]}
                 nickname={data?.result.user.nickname}
                 userId={data?.result.user.userId}
-                homeGym={data?.result.user.homeGym}
+                homeGym={data?.result.user.homeGym.placeName}
                 ageRange={data?.result.user.ageRange}
                 content={data?.result.content}
-                place={data?.result.place}
+                place={data?.result.place.placeName}
                 limits={data?.result.limits}
                 member={data?.result.member}
                 imgUri={data?.result.imgUri}

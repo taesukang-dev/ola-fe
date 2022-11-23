@@ -3,22 +3,25 @@ import Input from "../../element/Input";
 import Button from "../../element/Button";
 import {useDispatch, useSelector} from "react-redux";
 import Text from "../../element/Text";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import {writeTeamPost} from "../../shared/api/api";
 import {useNavigate} from "react-router-dom";
 import FileUpload from "../../component/fileupload/FileUpload";
 import s3Upload from "../../shared/S3Upload";
 import {setFile} from "../../store/fileSlice";
+import SearchHomeyGym from "../../component/searchhomegym/SearchHomeyGym";
+import {setSignUpPlace} from "../../store/userSlice";
+import {setPlace, setWritePlace} from "../../store/placeSlice";
 
 const TeamWrite = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
     const file = useSelector((state) => state.file)
+    const place = useSelector((state) => state.place)
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
-    const [place, setPlace] = useState('')
     const [limits, setLimits] = useState('')
 
     const {mutate} = useMutation((param) => writeTeamPost(param), {
@@ -28,7 +31,6 @@ const TeamWrite = () => {
     const writeTeamPostMutate = async () => {
         if (title.replace(/ /gi, '').length === 0 ||
             content.replace(/ /gi, '').length === 0 ||
-            place.replace(/ /gi, '').length === 0 ||
             limits.replace(/ /gi, '').length === 0) {
             alert("입력을 확인해주세요.")
             return
@@ -41,14 +43,25 @@ const TeamWrite = () => {
         mutate({
             title: title,
             content: content,
-            place: place,
+            homeGymRequest: place.place,
             limits: limits,
             username: user.current,
             imgUri: imgUri
         });
 
         dispatch(setFile(''))
+        dispatch(setWritePlace({
+            placeName: '',
+            roadAddressName: '',
+            categoryName: '',
+            x: '',
+            y: ''
+        }))
     }
+
+    useEffect(() => {
+        console.log(place.place)
+    }, [place])
 
     return (
         <s.GridBox>
@@ -58,10 +71,7 @@ const TeamWrite = () => {
                     label={"제목"}
                     _onChange={(e) => setTitle(e.target.value)}
                 />
-                <Input
-                    label={"장소"}
-                    _onChange={(e) => setPlace(e.target.value)}
-                />
+                <SearchHomeyGym title={"teamPost"}/>
                 <FileUpload />
                 <s.SelectContainer onChange={(e) => setLimits(e.target.value)}>
                     <Text bold>인원</Text>

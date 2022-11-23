@@ -34,12 +34,14 @@ const SignedHeader = () => {
             eventSource.close();
         });
 
-        navigator.geolocation.getCurrentPosition((pos) => {
-            let latitude = pos.coords.latitude;
-            let longitude = pos.coords.longitude;
-            console.log("현재 위치는 : " + latitude + ", "+ longitude);
-            dispatch(setUserPosition({x: latitude, y: longitude}))
-        })
+        if (user.x === 0 && user.y === 0) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                let latitude = pos.coords.latitude;
+                let longitude = pos.coords.longitude;
+                console.log("현재 위치는 : " + latitude + ", "+ longitude);
+                dispatch(setUserPosition({x: latitude, y: longitude}))
+            })
+        }
     }, [])
 
     return (

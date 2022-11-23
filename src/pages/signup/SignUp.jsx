@@ -10,10 +10,13 @@ import FileUpload from "../../component/fileupload/FileUpload";
 import {setFile} from "../../store/fileSlice";
 import {useDispatch, useSelector} from "react-redux";
 import s3Upload from "../../shared/S3Upload";
+import SearchHomeyGym from "../../component/searchhomegym/SearchHomeyGym";
+import {setSignUpPlace} from "../../store/userSlice";
 
 const SignUp = () => {
     const dispatch = useDispatch()
     const file = useSelector((state) => state.file)
+    const userPlace = useSelector((state) => state.user.place)
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -22,7 +25,6 @@ const SignUp = () => {
     const [ageRange, setAgeRange] = useState('')
     const [gender, setGender] = useState('')
     const [nickname, setNickname] = useState('')
-    const [homeGym, setHomeGym] = useState('')
 
     const { mutate, isLoading, isSuccess, isError } = useMutation((param) => signUp(param), {
         onSuccess: (data) => navigate('/login')
@@ -39,11 +41,12 @@ const SignUp = () => {
             name.replace(/ /gi, '').length === 0 ||
             ageRange.replace(/ /gi, '').length === 0 ||
             gender.replace(/ /gi, '').length === 0 ||
-            nickname.replace(/ /gi, '').length === 0) {
+            nickname.replace(/ /gi, '').length === 0 ||
+            userPlace.placeName === '') {
             alert("빠짐없이 입력해주세요.")
             return
         }
-        if (homeGym.replace(/ /gi, '').length === 0) setHomeGym('없음')
+
         if (username.length < 5) {
             alert("아이디는 5글자 이상이어야 합니다.")
             return
@@ -61,10 +64,17 @@ const SignUp = () => {
             nickname: nickname,
             name: name,
             ageRange: ageRange,
-            homeGym: homeGym,
+            homeGymRequest: userPlace,
             gender: gender,
         });
         dispatch(setFile(''))
+        dispatch(setSignUpPlace({
+            placeName: '',
+            roadAddressName: '',
+            categoryName: '',
+            x: '',
+            y: ''
+        }))
     }
 
     return (
@@ -131,10 +141,7 @@ const SignUp = () => {
                     label={"닉네임"}
                     _onChange={(e) => setNickname(e.target.value)}
                 />
-                <Input
-                    label={"홈짐 혹은 자주 가는 암장 (선택)"}
-                    _onChange={(e) => setHomeGym(e.target.value)}
-                />
+                <SearchHomeyGym />
             </div>
             <Button
                 type={"submit"} padding={"10px"}

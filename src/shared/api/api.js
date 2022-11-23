@@ -1,4 +1,5 @@
 import axiosInstance from "./instance";
+import kakaoInstance from "./KakaoInstance";
 
 export const signUp = (param) => axiosInstance.post('/v1/users/join', param).then(res => res)
 
@@ -53,3 +54,5 @@ export const deleteComment = (postId, commentId) => axiosInstance.delete(`/v1/po
 export const getAlarms = () => axiosInstance.get(`/v1/alarms`).then(res => res)
 
 export const deleteAlarms = (alarmId) => axiosInstance.delete(`/v1/alarms/${alarmId}`).then(res => res)
+
+export const kakaoSearch = (query, y=0, x=0) => kakaoInstance.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${query}&y=${y}&x=${x}`).then(res => res)

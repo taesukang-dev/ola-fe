@@ -38,7 +38,7 @@ const TeamPostList = ({ teamPostList, title="팀 모집", count = 10 }) => {
                                         id={e.id}
                                         status={e.status}
                                         title={e.title}
-                                        place={e.place}
+                                        place={e.place.placeName}
                                         limits={e.limits}
                                         members={e.member}
                                     />

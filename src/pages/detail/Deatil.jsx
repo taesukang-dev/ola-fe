@@ -7,6 +7,7 @@ import Post from "../../component/post/Post";
 import Comment from "../../component/comment/Comment";
 import {useSelector} from "react-redux";
 import UnAuthComment from "../../component/comment/UnAuthComment";
+import {useEffect} from "react";
 
 const Detail = () => {
     const navigate = useNavigate()
@@ -25,7 +26,7 @@ const Detail = () => {
                     title={data?.result.title}
                     registeredAt={data?.result.registeredAt.split('T')[0]}
                     nickname={data?.result.user.nickname}
-                    homeGym={data?.result.user.homeGym}
+                    homeGym={data?.result.user.homeGym.placeName}
                     ageRange={data?.result.user.ageRange}
                     content={data?.result.content}
                     imgUri={data?.result.imgUri}

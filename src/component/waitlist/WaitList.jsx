@@ -43,7 +43,7 @@ const WaitList = ({id, member, userId, limits}) => {
                                     <s.MemberBox
                                         url={`${process.env.REACT_APP_AWS_PATH}/${e.imgUri}`}
                                     />
-                                    {e.nickname} ({e.ageRange}대, {e.homeGym})
+                                    {e.nickname} ({e.ageRange}대, {e.homeGym.placeName})
                                 </s.MemberCard>
                                 {
                                     limits - member.length > 0 &&
