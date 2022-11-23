@@ -1,5 +1,5 @@
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Input from "../../element/Input";
 import * as s from './Update.style'
 import Text from "../../element/Text";
@@ -10,8 +10,11 @@ import {updateTeamPost} from "../../shared/api/api";
 import FileUpload from "../../component/fileupload/FileUpload";
 import s3Upload from "../../shared/S3Upload";
 import {setFile} from "../../store/fileSlice";
+import SearchHomeyGym from "../../component/searchhomegym/SearchHomeyGym";
+import {setWritePlace} from "../../store/placeSlice";
 
 const UpdateTeamPost = () => {
+    const place = useSelector((state) => state.place).place
     const dispatch = useDispatch()
     const file = useSelector((state) => state.file)
     const navigate = useNavigate()
@@ -19,7 +22,6 @@ const UpdateTeamPost = () => {
     const user = useSelector((state) => state.user)
     const location = useLocation().state.data;
     const [updateTitle, setUpdateTitle] = useState(location.title)
-    const [updatePlace, setUpdatePlace] = useState(location.place)
     const [updateLimits, setUpdateLimits] = useState(location.limits)
     const [updateContent, setUpdateContent] = useState(location.content)
 
@@ -28,15 +30,14 @@ const UpdateTeamPost = () => {
 
     const teamPostUpdateMutate = async () => {
         if (updateTitle.replace(/ /gi, '').length === 0 ||
-            updatePlace.replace(/ /gi, '').length === 0 ||
             updateContent.replace(/ /gi, '').length === 0) {
             alert('공백은 불가합니다.')
             return
         }
         if (updateTitle === location.title &&
-            updatePlace === location.place &&
             updateLimits === location.limits &&
-            updateContent === location.content) {
+            updateContent === location.content &&
+            place.placeName === '') {
             alert('수정되지 않았습니다.')
             return
         }
@@ -49,11 +50,19 @@ const UpdateTeamPost = () => {
             id: id,
             title: updateTitle,
             content: updateContent,
-            place: updatePlace,
+            homeGymRequest: place,
             limits: updateLimits,
             imgUri: imgUri === '' ? location.imgUri : imgUri
-        });
+        })
+
         dispatch(setFile(''))
+        dispatch(setWritePlace({
+            placeName: '',
+            roadAddressName: '',
+            categoryName: '',
+            x: '',
+            y: ''
+        }))
     }
 
     return (
@@ -65,11 +74,7 @@ const UpdateTeamPost = () => {
                     defaultValue={location.title}
                     _onChange={(e) => setUpdateTitle(e.target.value)}
                 />
-                <Input
-                    label={"장소"}
-                    defaultValue={location.place}
-                    _onChange={(e) => setUpdatePlace(e.target.value)}
-                />
+                <SearchHomeyGym title={"teamPost"} updateParam={location.place.placeName} />
                 <div>
                     <FileUpload src={`${process.env.REACT_APP_AWS_PATH}/${location.imgUri}`} />
                 </div>
