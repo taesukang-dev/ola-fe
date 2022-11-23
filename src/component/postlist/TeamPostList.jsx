@@ -46,7 +46,6 @@ const TeamPostList = ({ teamPostList, title="팀 모집", count = 10 }) => {
                         )
                     }
                 </s.CardContainer>
-
             </s.GridBox>
         </s.GridContainer>
     )
