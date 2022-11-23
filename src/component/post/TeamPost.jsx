@@ -60,7 +60,7 @@ const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, c
                 </s.UserBox>
             </s.TitleContainer>
             <s.MemberContainer>
-                <div style={{fontWeight: "bold", margin: "10px 0px"}}>{place}</div>
+                <div style={{fontWeight: "bold", margin: "16px 0px 32px 0px", textAlign: "right"}}>{place}</div>
                 <s.MemberCountBox>
                     <Text>팀</Text>
                     <Text bold>( {member.length} / {limits} )</Text>
@@ -87,7 +87,7 @@ const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, c
                                         <s.MemberBox
                                             url={`${process.env.REACT_APP_AWS_PATH}/${e.imgUri}`}
                                         />
-                                        {e.nickname} ({e.ageRange}대, {e.homeGym})
+                                        {e.nickname} ({e.ageRange}대, {e.homeGym.placeName})
                                     </s.MemberCard>
                                     {
                                         userId === user.current // 방장
