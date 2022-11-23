@@ -7,6 +7,13 @@ const user = createSlice({
         position: {
             x: 0,
             y: 0
+        },
+        place: {
+            placeName: '',
+            roadAddressName: '',
+            categoryName: '',
+            x: '',
+            y: ''
         }
     },
     reducers: {
@@ -17,9 +24,12 @@ const user = createSlice({
             state.position.x = action.payload.x
             state.position.y = action.payload.y
         },
+        setSignUpPlace(state, action) {
+            state.place = action.payload
+        }
     }
 })
 
-export const {setUserUp, setUserPosition} = user.actions
+export const {setUserUp, setUserPosition, setSignUpPlace} = user.actions
 
 export default user
