@@ -4,6 +4,7 @@ import alarm from "./alarmModalSlice";
 import page from "./pageSlice";
 import keyword from "./keywordSlice";
 import file from "./fileSlice";
+import place from "./placeSlice";
 
 export default configureStore({
     reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
         page: page.reducer,
         keyword: keyword.reducer,
         file: file.reducer,
+        place: place.reducer
     }
 })
