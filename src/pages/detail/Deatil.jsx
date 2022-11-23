@@ -7,7 +7,6 @@ import Post from "../../component/post/Post";
 import Comment from "../../component/comment/Comment";
 import {useSelector} from "react-redux";
 import UnAuthComment from "../../component/comment/UnAuthComment";
-import {useEffect} from "react";
 
 const Detail = () => {
     const navigate = useNavigate()
