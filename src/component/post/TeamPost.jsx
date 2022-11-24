@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import WaitList from "../waitlist/WaitList";
 
-const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, content, ageRange, place, limits, member, imgUri}) => {
+const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, content, ageRange, place, limits, member, imgUri, address}) => {
     const queryClient = useQueryClient()
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
@@ -60,7 +60,11 @@ const TeamPost = ({id, title, status, registeredAt, nickname, userId, homeGym, c
                 </s.UserBox>
             </s.TitleContainer>
             <s.MemberContainer>
-                <div style={{fontWeight: "bold", margin: "16px 0px 32px 0px", textAlign: "right"}}>{place}</div>
+                <div style={{fontWeight: "bold", margin: "16px 0px 32px 0px", textAlign: "right"}}>
+                    {place}
+                    <div style={{fontSize: "12px", textAlign: "right"}}>{address}</div>
+                </div>
+
                 <s.MemberCountBox>
                     <Text>팀</Text>
                     <Text bold>( {member.length} / {limits} )</Text>

@@ -70,8 +70,8 @@ const SignedHeader = () => {
                     padding={"10px"} margin={"0px 0px 0px 10px"}
                     _onClick={() => {
                         deleteCookie('x_auth')
-                        dispatch(setUserUp(''))
                         navigate('/')
+                        dispatch(setUserUp(''))
                     }}
                 >로그아웃</Button>
             </s.SideBox>

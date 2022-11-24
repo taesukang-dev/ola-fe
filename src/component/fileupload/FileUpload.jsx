@@ -7,8 +7,6 @@ import {setFile} from "../../store/fileSlice";
 const FileUpload = ({src=''}) => {
     const dispatch = useDispatch()
     useEffect(() => {
-        console.log('region', process.env.REACT_APP_AWS_REGION)
-        console.log('identy', process.env.REACT_APP_AWS_IDENTY_POOL_ID)
         AWS.config.update({
             region: process.env.REACT_APP_AWS_REGION,
             credentials: new AWS.CognitoIdentityCredentials({

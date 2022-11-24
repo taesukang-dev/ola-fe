@@ -20,6 +20,6 @@ export const BannerText = styled.div`
     color: black;
     width: 100%;
     @media(max-width: 450px) {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 `
