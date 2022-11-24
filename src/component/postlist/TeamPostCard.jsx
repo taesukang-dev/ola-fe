@@ -1,6 +1,5 @@
 import * as s from './PostList.style'
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 import {useSelector} from "react-redux";
 
 const TeamPostCard = ({id, status, title, place, limits, members}) => {
