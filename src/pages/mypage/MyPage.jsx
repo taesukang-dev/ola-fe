@@ -5,17 +5,9 @@ import PostList from "../../component/postlist/PostList";
 import TeamPostList from "../../component/postlist/TeamPostList";
 
 const MyPage = () => {
-    const {data} = useQuery(['myPosts'], () => getMyPosts(), {
-        onSuccess: (data) => {
-            console.log(data)
-        }
-    })
+    const {data} = useQuery(['myPosts'], () => getMyPosts())
 
-    const teamData = useQuery(['myTeamPost'], () => getMyTeamPosts(), {
-        onSuccess: (data) => {
-            console.log(data)
-        }
-    })
+    const teamData = useQuery(['myTeamPost'], () => getMyTeamPosts())
 
     return (
         <>

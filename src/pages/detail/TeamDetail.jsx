@@ -34,6 +34,7 @@ const TeamDetail = () => {
                 ageRange={data?.result.user.ageRange}
                 content={data?.result.content}
                 place={data?.result.place.placeName}
+                address={data?.result.place.roadAddressName}
                 limits={data?.result.limits}
                 member={data?.result.member}
                 imgUri={data?.result.imgUri}
