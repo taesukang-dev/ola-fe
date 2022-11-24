@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getCookie} from "../Cookie";
+import {deleteCookie, getCookie} from "../Cookie";
 
 const axiosConfig = {
     timeout: 3000,
@@ -29,6 +29,9 @@ axiosInstance.interceptors.response.use(
         return res;
     },
     (error) => {
+        if (error.response.status === 401) {
+            deleteCookie('x_auth');
+        }
         return Promise.reject(error);
     }
 );
