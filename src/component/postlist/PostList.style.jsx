@@ -100,6 +100,8 @@ export const CardTitleBox = styled.div`
 
 export const CardPlaceBox = styled.div`
     padding: 10px;
+    white-space:nowrap;
+    text-overflow: ellipsis;
 `
 
 export const CardStatusBox = styled.div`
