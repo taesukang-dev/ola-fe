@@ -15,7 +15,7 @@ export const getMyPosts = () => axiosInstance.get('/v1/posts').then(res => res)
 
 export const getMyTeamPosts = () => axiosInstance.get('/v1/posts/team').then(res => res)
 
-export const getTeamPostsByLocation = (param) => axiosInstance.post('/v1/posts/team/location', param).then(res => res)
+export const getTeamPostsByLocation = (param, page = 0) => axiosInstance.post(`/v1/posts/team/location?page=${page}`, param).then(res => res)
 
 export const writeTeamPost = (param) => axiosInstance.post('/v1/posts/team', param).then(res => res)
 
