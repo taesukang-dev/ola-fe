@@ -10,28 +10,53 @@ import {useEffect, useState} from "react";
 import SearchBar from "../../component/searchbar/SearchBar";
 
 const TeamPostBoard = () => {
-    const user = useSelector((state) => state.user).position
-    const [location, setLocation] = useState(false)
+    const user = useSelector((state) => state.user)
+    const [location, setLocation] = useState(true)
     const navigate = useNavigate()
     const page = useSelector((state) => state.page)
     const keyword = useSelector((state) => state.keyword)
     const place = useSelector((state) => state.keyword)
     const {data, refetch} = useQuery(['teamPostList'], () => getTeamPostList(page.teamPost, keyword.teamPost, place.place))
-    const locationPosts = useQuery(['teamPostByLocation'], () => getTeamPostsByLocation({x: user.x, y: user.y}),{
+    const locationPosts = useQuery(['teamPostByLocation'], () => getTeamPostsByLocation({x: user.position.x, y: user.position.y}, page.locationPost),{
         onSuccess: (data) => console.log(data),
-        enabled: !!location
+        enabled: !!location && user.position.x !== 0 && user.position.y !== 0 && user.current !== ''
     })
 
     useEffect(() => {
         refetch()
     }, [page, keyword.teamPost])
 
+    useEffect(() => {
+        if (user.current !== '') {
+            locationPosts.refetch()
+        }
+    }, [page.locationPost])
+
+    useEffect(() => {
+        if (user.current === '') {
+            setLocation(false);
+        } else {
+            setLocation(true)
+        }
+    }, [user.current])
+
         return (
             <s.GridContainer>
                 {!location && data && <TeamPostList teamPostList={data.result.contents}/>}
-                {location && locationPosts.data && <TeamPostList teamPostList={locationPosts.data.result} />}
+                {
+                    user.position.x !== 0 &&
+                    user.position.y !== 0 &&
+                    location && locationPosts.data && <TeamPostList teamPostList={locationPosts.data.result} />
+                }
+                {
+                    user.position.x === 0 &&
+                    user.position.y === 0 &&
+                    user.current !== '' &&
+                    <div>위치 정보를 수집 중입니다.</div>
+                }
                 <s.GridBox>
                     {
+                        user.current !== '' &&
                         !location ?
                             <Button
                                 padding={"10px"}
@@ -46,8 +71,9 @@ const TeamPostBoard = () => {
                         _onClick={() => navigate("/write/team")}
                     >글작성</Button>
                 </s.GridBox>
-                <SearchBar type={"teamPost"}/>
-                {data && <PageButton buttonList={data?.result.pageList} type={"teamPost"}/>}
+                {!location && <SearchBar type={"teamPost"}/>}
+                {!location && data && <PageButton buttonList={data?.result.pageList} type={"teamPost"}/>}
+                {location && locationPosts.data && <PageButton buttonList={data?.result.pageList} type={"locationPost"}/>}
             </s.GridContainer>
         )
 }
