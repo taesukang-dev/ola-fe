@@ -2,7 +2,6 @@ import axios from "axios";
 
 const axiosConfig = {
     timeout: 3000,
-    baseURL: 'http://localhost:8080/api',
 };
 
 const KakaoInstance = axios.create(axiosConfig);

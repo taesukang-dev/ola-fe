@@ -3,7 +3,8 @@ import {deleteCookie, getCookie} from "../Cookie";
 
 const axiosConfig = {
     timeout: 3000,
-    baseURL: 'http://localhost:8080/api',
+    // baseURL: `http://${process.env.REACT_APP_INSTANCE}:${process.env.REACT_APP_INSTANCE_PORT}/api`,
+    baseURL: `http://localhost:8080/api`,
 };
 
 const axiosInstance = axios.create(axiosConfig);
