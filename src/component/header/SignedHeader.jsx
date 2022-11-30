@@ -17,8 +17,8 @@ const SignedHeader = () => {
     const user = useSelector((state) => state.user.position)
 
     useEffect(() => {
-        // const eventSource = new EventSource(`http://${process.env.REACT_APP_INSTANCE}:${process.env.REACT_APP_INSTANCE_PORT}/api/v1/users/alarm/subscribe?token=` + getCookie('x_auth').split(' ')[1])
-        const eventSource = new EventSource(`http://localhost:8080/api/v1/users/alarm/subscribe?token=` + getCookie('x_auth').split(' ')[1])
+        const eventSource = new EventSource(`https://${process.env.REACT_APP_INSTANCE}:${process.env.REACT_APP_INSTANCE_PORT}/api/v1/users/alarm/subscribe?token=` + getCookie('x_auth').split(' ')[1])
+        // const eventSource = new EventSource(`http://localhost:8080/api/v1/users/alarm/subscribe?token=` + getCookie('x_auth').split(' ')[1])
         eventSource.addEventListener("open", function (event) {
             console.log("connection opened");
         });
@@ -34,15 +34,18 @@ const SignedHeader = () => {
             }
             eventSource.close();
         });
-
-        if (user.x === 0 && user.y === 0) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                let latitude = pos.coords.latitude;
-                let longitude = pos.coords.longitude;
-                console.log("현재 위치는 : " + latitude + ", "+ longitude);
-                dispatch(setUserPosition({x: latitude, y: longitude}))
-            })
-        }
+    }, [])
+    useEffect(() => {
+        setTimeout(() => {
+            if (user.x === 0 && user.y === 0) {
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    let latitude = pos.coords.latitude;
+                    let longitude = pos.coords.longitude;
+                    console.log("현재 위치는 : " + latitude + ", "+ longitude);
+                    dispatch(setUserPosition({x: latitude, y: longitude}))
+                })
+            }
+        }, 500)
     }, [])
 
     return (
