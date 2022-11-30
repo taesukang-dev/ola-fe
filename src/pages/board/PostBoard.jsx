@@ -11,6 +11,7 @@ import SearchBar from "../../component/searchbar/SearchBar";
 
 const PostBoard = () => {
     const navigate = useNavigate()
+    const user = useSelector((state) => state.user)
     const page = useSelector((state) => state.page)
     const keyword = useSelector((state) => state.keyword)
     const { data, refetch } = useQuery(['postList'], () => getPostList(page.post, keyword.post))
@@ -23,10 +24,13 @@ const PostBoard = () => {
         <s.GridContainer>
             {data && <PostList postList={data?.result.contents} />}
             <s.GridBox>
-                <Button
+                {
+                    user.current !== '' &&
+                    <Button
                     padding={"10px"}
                     _onClick={() => navigate("/write")}
-                >글작성</Button>
+                    >글작성</Button>
+                }
             </s.GridBox>
             <SearchBar type={"post"}/>
             {data && <PageButton buttonList={data?.result.pageList} type={"post"}/>}

@@ -65,11 +65,14 @@ const TeamPostBoard = () => {
                                 padding={"10px"}
                                 _onClick={() => setLocation(false)}>최신 순</Button>
                     }
-                    <Button
-                        padding={"10px"}
-                        margin={"0px 0px 0px 10px"}
-                        _onClick={() => navigate("/write/team")}
-                    >글작성</Button>
+                    {
+                        user.current !== '' &&
+                        <Button
+                            padding={"10px"}
+                            margin={"0px 0px 0px 10px"}
+                            _onClick={() => navigate("/write/team")}
+                        >글작성</Button>
+                    }
                 </s.GridBox>
                 {!location && <SearchBar type={"teamPost"}/>}
                 {!location && data && <PageButton buttonList={data?.result.pageList} type={"teamPost"}/>}
