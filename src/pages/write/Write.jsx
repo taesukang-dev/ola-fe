@@ -31,7 +31,6 @@ const Write = () => {
             if (file.file !== '') {
                 imgUri = await s3Upload(file.file)
             }
-            console.log(imgUri)
             mutate(imgUri)
             dispatch(setFile(''))
         } else {

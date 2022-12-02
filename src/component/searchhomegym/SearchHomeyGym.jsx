@@ -23,7 +23,6 @@ const SearchHomeyGym = ({updateParam = '', title = ''}) => {
     }, 200), [homeGym]);
 
     const {data} = useQuery([homeGym], () => kakaoSearch(homeGym), {
-        onSuccess: (data) => console.log(data),
         enabled: !!homeGym
     })
 

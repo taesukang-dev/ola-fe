@@ -59,10 +59,6 @@ const TeamWrite = () => {
         }))
     }
 
-    useEffect(() => {
-        console.log(place.place)
-    }, [place])
-
     return (
         <s.GridBox>
             <div style={{width: "80%"}}>

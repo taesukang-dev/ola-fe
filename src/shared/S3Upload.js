@@ -15,8 +15,6 @@ const S3Upload = async (file) => {
 
     await promise.then(
         function (data) {
-            console.log(data)
-            console.log(data.Key.split('/')[1])
             uri = data.Key.split('/')[1]
         },
         function (err) {

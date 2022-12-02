@@ -18,7 +18,6 @@ const TeamPostBoard = () => {
     const place = useSelector((state) => state.keyword)
     const {data, refetch} = useQuery(['teamPostList'], () => getTeamPostList(page.teamPost, keyword.teamPost, place.place))
     const locationPosts = useQuery(['teamPostByLocation'], () => getTeamPostsByLocation({x: user.position.x, y: user.position.y}, page.locationPost),{
-        onSuccess: (data) => console.log(data),
         enabled: !!location && user.position.x !== 0 && user.position.y !== 0 && user.current !== ''
     })
 
