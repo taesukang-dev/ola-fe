@@ -1,6 +1,6 @@
 import * as s from './SearchHomeGym.style'
 import Input from "../../element/Input";
-import {kakaoSearch} from "../../shared/api/api";
+import {kakaoPlaceSearch} from "../../shared/api/api";
 import {useMemo, useRef, useState} from "react";
 import _ from "lodash";
 import {useQuery} from "@tanstack/react-query";
@@ -22,7 +22,7 @@ const SearchHomeyGym = ({updateParam = '', title = ''}) => {
         setHomeGym(query)
     }, 200), [homeGym]);
 
-    const {data} = useQuery([homeGym], () => kakaoSearch(homeGym), {
+    const {data} = useQuery([homeGym], () => kakaoPlaceSearch(homeGym), {
         enabled: !!homeGym
     })
 
