@@ -57,4 +57,8 @@ export const getAlarms = () => axiosInstance.get(`/v1/alarms`).then(res => res)
 
 export const deleteAlarms = (alarmId) => axiosInstance.delete(`/v1/alarms/${alarmId}`).then(res => res)
 
-export const kakaoSearch = (query, y=0, x=0) => kakaoInstance.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${query}&y=${y}&x=${x}`).then(res => res)
+export const kakaoPlaceSearch = (query, y=0, x=0) => kakaoInstance.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${query}&y=${y}&x=${x}`).then(res => res)
+
+export const kakaoSearch = () => kakaoInstance.get(`https://dapi.kakao.com/v2/search/blog?query="클라이밍 후기"&sort=accuracy&size=5`).then(res => res)
+
+export const getRecommendPostsImg = (param) => axiosInstance.post('/v2/posts/recommend', param).then(res => res)
